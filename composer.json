@@ -16,5 +16,16 @@
       "homepage": "http://www.higidi.com",
       "role": "Developer"
     }
-  ]
+  ],
+  "autoload": {
+    "psr-4": {
+      "Higidi\\ComposerPhpCSStandardsPlugin\\": "src/"
+    }
+  },
+  "require": {
+    "composer-plugin-api": "^1.1"
+  },
+  "extra": {
+    "class": "Higidi\\ComposerPhpCSStandardsPlugin\\Plugin"
+  }
 }
