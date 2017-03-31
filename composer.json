@@ -1,0 +1,20 @@
+{
+  "name": "higidi/composer-phpcodesniffer-standards-plugin",
+  "description": "Composer plugin installing PHP_CodeSniffer Standards",
+  "keywords": [
+    "composer",
+    "plugins",
+    "codesniffer",
+    "coding-standards"
+  ],
+  "type": "composer-plugin",
+  "license": "GPL-3.0",
+  "authors": [
+    {
+      "name": "Daniel Hürtgen",
+      "email": "daniel@higidi.de",
+      "homepage": "http://www.higidi.com",
+      "role": "Developer"
+    }
+  ]
+}
