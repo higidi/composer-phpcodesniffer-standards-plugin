@@ -1,0 +1,1 @@
+# composer-phpcodesniffer-standards-plugin
