@@ -22,6 +22,11 @@
       "Higidi\\ComposerPhpCSStandardsPlugin\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Higidi\\ComposerPhpCSStandardsPlugin\\Tests\\": "tests/src/"
+    }
+  },
   "require": {
     "composer-plugin-api": "^1.1",
     "squizlabs/php_codesniffer": "^2.0",
