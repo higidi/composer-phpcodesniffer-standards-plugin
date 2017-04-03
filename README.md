@@ -3,6 +3,8 @@ About
 
 Composer plugin installs [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) Standards.
 
+[![Build Status](https://travis-ci.org/higidi/composer-phpcodesniffer-standards-plugin.svg?branch=master)](https://travis-ci.org/higidi/composer-phpcodesniffer-standards-plugin)
+
 Requirements
 ------------
 
