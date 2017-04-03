@@ -1,0 +1,37 @@
+{
+  "name": "higidi/composer-phpcodesniffer-standards-plugin",
+  "description": "Composer plugin installing PHP_CodeSniffer Standards",
+  "keywords": [
+    "composer",
+    "plugins",
+    "codesniffer",
+    "coding-standards"
+  ],
+  "type": "composer-plugin",
+  "license": "GPL-3.0",
+  "authors": [
+    {
+      "name": "Daniel Hürtgen",
+      "email": "daniel@higidi.de",
+      "homepage": "http://www.higidi.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Higidi\\ComposerPhpCSStandardsPlugin\\": "src/"
+    }
+  },
+  "require": {
+    "composer-plugin-api": "^1.1",
+    "squizlabs/php_codesniffer": "^2.0",
+    "symfony/finder": "^3.0",
+    "symfony/filesystem": "^3.0"
+  },
+  "require-dev": {
+    "composer/composer": "^1.4"
+  },
+  "extra": {
+    "class": "Higidi\\ComposerPhpCSStandardsPlugin\\Plugin"
+  }
+}
