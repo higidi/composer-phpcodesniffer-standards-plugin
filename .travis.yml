@@ -13,3 +13,6 @@ php:
 
 install:
   - 'composer install --prefer-dist'
+
+script:
+  - 'php vendor/bin/phpunit -c phpunit.xml.dist'

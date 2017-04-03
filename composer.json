@@ -22,6 +22,11 @@
       "Higidi\\ComposerPhpCSStandardsPlugin\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Higidi\\ComposerPhpCSStandardsPlugin\\Tests\\": "tests/src/"
+    }
+  },
   "require": {
     "composer-plugin-api": "^1.1",
     "squizlabs/php_codesniffer": "^2.0",
@@ -29,7 +34,8 @@
     "symfony/filesystem": "^3.0"
   },
   "require-dev": {
-    "composer/composer": "^1.4"
+    "composer/composer": "^1.4",
+    "phpunit/phpunit": "^5.7"
   },
   "extra": {
     "class": "Higidi\\ComposerPhpCSStandardsPlugin\\Plugin"
