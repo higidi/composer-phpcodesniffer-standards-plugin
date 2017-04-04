@@ -35,7 +35,7 @@
   },
   "require-dev": {
     "composer/composer": "^1.4",
-    "phpunit/phpunit": "^5.7"
+    "phpunit/phpunit": "^4.5 || ^5.0.5"
   },
   "extra": {
     "class": "Higidi\\ComposerPhpCSStandardsPlugin\\Plugin"
