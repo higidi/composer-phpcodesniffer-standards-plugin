@@ -119,14 +119,17 @@ class Installer extends LibraryInstaller
     {
         $sourceStandards = $this->getSourceStandards($package);
         $destinationStandards = $this->getDestinationStandards($repo);
+        $this->io->writeError('    Removing PHP-CodeSniffer Standards:', false);
         foreach ($sourceStandards as $sourceStandard) {
             if (!$destinationStandards->hasStandard($sourceStandard)) {
                 continue;
             }
+            $this->io->writeError(sprintf(' <info>%s</info>', $sourceStandard->getName()));
             $destinationStandard = $destinationStandards->getStandard($sourceStandard);
 
             $this->filesystem->removeDirectory($destinationStandard->getPath());
         }
+        $this->io->writeError('');
     }
 
     /**
