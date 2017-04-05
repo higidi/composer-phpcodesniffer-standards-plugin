@@ -22,14 +22,20 @@
       "Higidi\\ComposerPhpCSStandardsPlugin\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Higidi\\ComposerPhpCSStandardsPlugin\\Tests\\": "tests/src/"
+    }
+  },
   "require": {
     "composer-plugin-api": "^1.1",
     "squizlabs/php_codesniffer": "^2.0",
-    "symfony/finder": "^3.0",
-    "symfony/filesystem": "^3.0"
+    "symfony/finder": "^2.1 || ^3.0",
+    "symfony/filesystem": "^2.1 || ^3.0"
   },
   "require-dev": {
-    "composer/composer": "^1.4"
+    "composer/composer": "^1.4",
+    "phpunit/phpunit": "^4.5 || ^5.0.5"
   },
   "extra": {
     "class": "Higidi\\ComposerPhpCSStandardsPlugin\\Plugin"
