@@ -103,11 +103,14 @@ class Installer extends LibraryInstaller
         $filesystem = new SymfonyFilesystem();
         $sourceStandards = $this->getSourceStandards($package);
         $destStandardsBasePath = $this->getPHPCodeSnifferStandardsBasePath($repo);
+        $this->io->writeError('    Installing PHP-CodeSniffer Standards:', false);
         foreach ($sourceStandards as $sourceStandard) {
+            $this->io->writeError(sprintf(' <info>%s</info>', $sourceStandard->getName()));
             $sourcePath = $sourceStandard->getPath();
             $destPath = $destStandardsBasePath . DIRECTORY_SEPARATOR . $sourceStandard->getName();
             $filesystem->mirror($sourcePath, $destPath, null, array('override' => $override));
         }
+        $this->io->writeError('');
     }
 
     /**
@@ -119,14 +122,17 @@ class Installer extends LibraryInstaller
     {
         $sourceStandards = $this->getSourceStandards($package);
         $destinationStandards = $this->getDestinationStandards($repo);
+        $this->io->writeError('    Removing PHP-CodeSniffer Standards:', false);
         foreach ($sourceStandards as $sourceStandard) {
             if (!$destinationStandards->hasStandard($sourceStandard)) {
                 continue;
             }
+            $this->io->writeError(sprintf(' <info>%s</info>', $sourceStandard->getName()));
             $destinationStandard = $destinationStandards->getStandard($sourceStandard);
 
             $this->filesystem->removeDirectory($destinationStandard->getPath());
         }
+        $this->io->writeError('');
     }
 
     /**
