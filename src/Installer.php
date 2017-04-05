@@ -43,6 +43,9 @@ class Installer extends LibraryInstaller
     public function isInstalled(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
         $isInstalled = parent::isInstalled($repo, $package);
+        if (!$isInstalled) {
+            return $isInstalled;
+        }
         $sourceStandards = $this->getSourceStandards($package);
         $destinationStandards = $this->getDestinationStandards($repo);
 
