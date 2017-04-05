@@ -160,7 +160,7 @@ class Installer extends LibraryInstaller
     protected function compareStandards(Standard $source, Standard $destination)
     {
         return $source->getName() === $destination->getName()
-            && sha1($source->getRuleSetXmlPath()) === sha1($destination->getRuleSetXmlPath());
+            && sha1_file($source->getRuleSetXmlPath()) === sha1_file($destination->getRuleSetXmlPath());
     }
 
     /**
