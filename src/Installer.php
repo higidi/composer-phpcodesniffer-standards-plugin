@@ -43,6 +43,9 @@ class Installer extends LibraryInstaller
     public function isInstalled(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
         $isInstalled = parent::isInstalled($repo, $package);
+        if (!$isInstalled) {
+            return $isInstalled;
+        }
         $sourceStandards = $this->getSourceStandards($package);
         $destinationStandards = $this->getDestinationStandards($repo);
 
@@ -160,7 +163,7 @@ class Installer extends LibraryInstaller
     protected function compareStandards(Standard $source, Standard $destination)
     {
         return $source->getName() === $destination->getName()
-            && sha1($source->getRuleSetXmlPath()) === sha1($destination->getRuleSetXmlPath());
+            && sha1_file($source->getRuleSetXmlPath()) === sha1_file($destination->getRuleSetXmlPath());
     }
 
     /**
