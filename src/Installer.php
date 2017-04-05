@@ -110,7 +110,6 @@ class Installer extends LibraryInstaller
             $destPath = $destStandardsBasePath . DIRECTORY_SEPARATOR . $sourceStandard->getName();
             $filesystem->mirror($sourcePath, $destPath, null, array('override' => $override));
         }
-        $this->io->writeError('');
     }
 
     /**
@@ -132,7 +131,6 @@ class Installer extends LibraryInstaller
 
             $this->filesystem->removeDirectory($destinationStandard->getPath());
         }
-        $this->io->writeError('');
     }
 
     /**
