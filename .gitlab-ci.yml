@@ -1,6 +1,10 @@
 stages:
   - test
 
+cache:
+  paths:
+    - vendor/
+
 test:5.3: &PHP-UNITTESTING
   image: tetraweb/php:5.3
   stage: test
