@@ -4,6 +4,8 @@ stages:
 test:5.3: &PHP-UNITTESTING
   image: tetraweb/php:5.3
   stage: test
+  tags:
+    - docker
   variables:
     TIMEZONE: "Europe/Berlin"
   before_script:
