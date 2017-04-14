@@ -78,7 +78,8 @@ class Standards implements \Iterator
      * @param string|Standard $standard
      * @return string
      */
-    protected function getStandardName($standard) {
+    protected function getStandardName($standard)
+    {
         if ($standard instanceof Standard) {
             $standard = $standard->getName();
         } else {

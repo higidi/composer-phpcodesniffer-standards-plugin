@@ -9,7 +9,7 @@ use Composer\Plugin\PluginInterface;
 class Plugin implements PluginInterface
 {
     /**
-     * @param Composer    $composer
+     * @param Composer $composer
      * @param IOInterface $io
      *
      * @return void

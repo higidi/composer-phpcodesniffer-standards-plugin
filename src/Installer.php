@@ -9,10 +9,10 @@ use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;
 use Composer\Repository\InstalledRepositoryInterface;
 use Composer\Util\Filesystem;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard;
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards;
+use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
+use Symfony\Component\Finder\Finder;
 
 class Installer extends LibraryInstaller
 {
@@ -86,7 +86,7 @@ class Installer extends LibraryInstaller
     public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
         if (!$repo->hasPackage($package)) {
-            throw new \InvalidArgumentException('Package is not installed: '.$package);
+            throw new \InvalidArgumentException('Package is not installed: ' . $package);
         }
         $this->removeStandards($repo, $package);
         parent::uninstall($repo, $package);
@@ -98,8 +98,11 @@ class Installer extends LibraryInstaller
      * @param bool $override
      * @return void
      */
-    protected function installStandards(InstalledRepositoryInterface $repo, PackageInterface $package, $override = false)
-    {
+    protected function installStandards(
+        InstalledRepositoryInterface $repo,
+        PackageInterface $package,
+        $override = false
+    ) {
         $filesystem = new SymfonyFilesystem();
         $sourceStandards = $this->getSourceStandards($package);
         $destStandardsBasePath = $this->getPHPCodeSnifferStandardsBasePath($repo);
