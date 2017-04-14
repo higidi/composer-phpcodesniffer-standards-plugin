@@ -224,4 +224,14 @@ class Installer extends LibraryInstaller
     {
         return $this->getInstallPath($this->getPHPCodeSnifferPackage($repo));
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function supports($packageType)
+    {
+        $secondaryPackageTypes = array('phpcodesniffer-standards');
+
+        return parent::supports($packageType) || in_array($packageType, $secondaryPackageTypes);
+    }
 }
