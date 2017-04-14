@@ -23,4 +23,4 @@ _TODO_
 Issues
 ------
 
-Bug reports and feature requests can be submitted on the [Github Issue Tracker](https://github.com/higidi/composer-phpcodesniffer-standards-plugin/issues) 
+Bug reports and feature requests can be submitted on the [Issue Tracker](https://git.higidi.com/higidi/composer-phpcodesniffer-standards-plugin/issues) 
