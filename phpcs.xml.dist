@@ -12,4 +12,8 @@
     <exclude-pattern>*/Fixtures/*</exclude-pattern>
 
     <rule ref="PSR2"/>
+
+    <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
+        <exclude-pattern>./tests/bootstrap.php</exclude-pattern>
+    </rule>
 </ruleset>
