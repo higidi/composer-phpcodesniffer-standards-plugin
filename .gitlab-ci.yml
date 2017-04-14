@@ -12,6 +12,7 @@ test:5.3: &PHP-UNITTESTING
     - docker
   variables:
     TIMEZONE: "Europe/Berlin"
+    WITH_XDEBUG: "true"
   before_script:
     - apt-get update; apt-get install -y zip unzip
     - composer install --optimize-autoloader --no-interaction --no-ansi --prefer-dist
