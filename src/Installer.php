@@ -16,7 +16,7 @@ use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards;
 
 class Installer extends LibraryInstaller
 {
-    const TYPE = 'php-codesniffer-standards';
+    const TYPE = 'phpcodesniffer-standard';
 
     /**
      * Initializes library installer.
