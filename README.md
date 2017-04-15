@@ -8,17 +8,29 @@ Composer plugin installs [PHP_CodeSniffer](https://github.com/squizlabs/PHP_Code
 Requirements
 ------------
 
-_TODO_
+- `PHP >= 5.3.3`
+- Composer package providing the PHP CodeSniffer Rulesets & Sniffs
 
 Installation
 ------------
 
-_TODO_
+```bash
+$ composer require higidi/composer-phpcodesniffer-standards-plugin
+```
 
-Documentation
--------------
+Change the type of your composer package to `php-codesniffer-standards`
 
-_TODO_
+Your composer.json should looks like:
+```json
+{
+    "name": "vendor/my-php-codesniffer-standards",
+    "description": "My codesniffer standards",
+    "type": "php-codesniffer-standards",
+    "require": {
+        "higidi/composer-phpcodesniffer-standards-plugin": "^1.0"
+    }
+}
+```
 
 Issues
 ------
