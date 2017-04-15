@@ -58,7 +58,7 @@ class Standard implements StandardInterface
         }
         $this->path = realpath($path);
         $this->name = basename($this->path);
-        $this->ruleSetXmlPath = $path . DIRECTORY_SEPARATOR . 'ruleset.xml';
+        $this->ruleSetXmlPath = $path . DIRECTORY_SEPARATOR . static::RULESET_FILENAME;
 
         if (!is_readable($this->ruleSetXmlPath)) {
             throw new InvalidStandardException(
