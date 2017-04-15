@@ -2,7 +2,7 @@
 
 namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard;
 
-class Standard
+class Standard implements StandardInterface
 {
     const RULESET_FILENAME = 'ruleset.xml';
 
@@ -34,7 +34,9 @@ class Standard
     }
 
     /**
-     * @return string
+     * Get the name of the PHPCodeSniffer standard.
+     *
+     * @return string The name of the PHPCodeSniffer standard.
      */
     public function getName()
     {
@@ -42,7 +44,9 @@ class Standard
     }
 
     /**
-     * @return string
+     * Get the path to PHPCodeSniffer standard.
+     *
+     * @return string The path to the PHPCodeSniffer standard.
      */
     public function getPath()
     {
@@ -50,7 +54,9 @@ class Standard
     }
 
     /**
-     * @return string
+     * Get the path to the PHPCodeSniffer ruleset.xml file.
+     *
+     * @return string The path to the PHPCodeSniffer ruleset.xml file.
      */
     public function getRuleSetXmlPath()
     {
