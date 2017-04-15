@@ -1,0 +1,38 @@
+stages:
+  - test
+
+cache:
+  paths:
+    - vendor/
+
+test:5.3: &PHP-UNITTESTING
+  image: tetraweb/php:5.3
+  stage: test
+  tags:
+    - docker
+  variables:
+    TIMEZONE: "Europe/Berlin"
+    WITH_XDEBUG: "true"
+  before_script:
+    - apt-get update; apt-get install -y zip unzip
+    - composer install --optimize-autoloader --no-interaction --no-ansi --prefer-dist
+  script:
+    - ./vendor/bin/phpunit --coverage-text --colors=never
+test:5.4:
+  <<: *PHP-UNITTESTING
+  image: tetraweb/php:5.4
+test:5.5:
+  <<: *PHP-UNITTESTING
+  image: tetraweb/php:5.5
+test:5.6:
+  <<: *PHP-UNITTESTING
+  image: tetraweb/php:5.6
+test:7.0:
+  <<: *PHP-UNITTESTING
+  image: tetraweb/php:7.0
+test:7.1:
+  <<: *PHP-UNITTESTING
+  image: tetraweb/php:7.1
+test:latest:
+  <<: *PHP-UNITTESTING
+  image: tetraweb/php:latest
