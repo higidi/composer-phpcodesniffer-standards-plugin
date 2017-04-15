@@ -5,6 +5,15 @@ cache:
   paths:
     - vendor/
 
+lint:coding-guideline: &PHP-LINTING
+  image: php:7.0-alpine
+  stage: test
+  script:
+    - ./vendor/bin/phpcs -s -n --report-full=result/phpcs-full.txt --report-diff=result/phpcs-diff.txt --report-summary=result/phpcs-summary.txt
+  artifacts:
+    when: on_failure
+    paths:
+      - result
 test:5.3: &PHP-UNITTESTING
   image: tetraweb/php:5.3
   stage: test
