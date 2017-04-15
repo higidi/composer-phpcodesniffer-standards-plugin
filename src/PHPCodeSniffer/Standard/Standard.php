@@ -2,6 +2,8 @@
 
 namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard;
 
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Exception\InvalidStandardException;
+
 class Standard implements StandardInterface
 {
     const RULESET_FILENAME = 'ruleset.xml';
@@ -31,6 +33,12 @@ class Standard implements StandardInterface
         $this->name = array_pop($pathParts);
         $this->path = $path;
         $this->ruleSetXmlPath = $path . DIRECTORY_SEPARATOR . 'ruleset.xml';
+
+        if (!is_readable($this->ruleSetXmlPath)) {
+            throw new InvalidStandardException(
+                sprintf('Standard "%s" doesn\'t contain a "ruleset.xml" file.', $this->name)
+            );
+        }
     }
 
     /**

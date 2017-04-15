@@ -47,7 +47,11 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateStandard()
     {
-        $standard = $this->fixture->create('foo');
+        $path = implode(
+            DIRECTORY_SEPARATOR,
+            array(__DIR__, '..', '..', '..', 'Fixtures', 'Standards', 'Standard1')
+        );
+        $standard = $this->fixture->create($path);
 
         $this->assertInstanceOf('Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Standard', $standard);
     }

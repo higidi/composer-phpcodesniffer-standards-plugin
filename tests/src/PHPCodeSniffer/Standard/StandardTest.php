@@ -43,4 +43,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($path, $standard->getPath(), 'getPath');
         $this->assertSame($ruleSetXmlPath, $standard->getRuleSetXmlPath(), 'getRuleSetXmlPath');
     }
+
+    public function testIfInvalidStandardExceptionIsThrown()
+    {
+        $this->expectException(
+            'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Exception\InvalidStandardException'
+        );
+
+        $path = implode(
+            DIRECTORY_SEPARATOR,
+            array(__DIR__, '..', '..', '..', 'Fixtures', 'Standards', 'InvalidStandard')
+        );
+
+        new Standard($path);
+    }
 }
