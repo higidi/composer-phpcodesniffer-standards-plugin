@@ -3,9 +3,9 @@
 namespace Higidi\ComposerPhpCSStandardsPlugin;
 
 use Composer\Composer;
+use Composer\IO\IOInterface;
 use Composer\Installer\BinaryInstaller;
 use Composer\Installer\LibraryInstaller;
-use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;
 use Composer\Repository\InstalledRepositoryInterface;
 use Composer\Util\Filesystem;
@@ -42,9 +42,8 @@ class Installer extends LibraryInstaller
      */
     public function isInstalled(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
-        $isInstalled = parent::isInstalled($repo, $package);
-        if (!$isInstalled) {
-            return $isInstalled;
+        if (!parent::isInstalled($repo, $package)) {
+            return false;
         }
         $sourceStandards = $this->getSourceStandards($package);
         $destinationStandards = $this->getDestinationStandards($repo);
@@ -53,12 +52,11 @@ class Installer extends LibraryInstaller
             if (!$destinationStandards->hasStandard($sourceStandard)
                 || !$this->compareStandards($sourceStandard, $destinationStandards->getStandard($sourceStandard))
             ) {
-                $isInstalled = false;
-                break;
+                return false;
             }
         }
 
-        return $isInstalled;
+        return true;
     }
 
     /**
@@ -78,7 +76,6 @@ class Installer extends LibraryInstaller
         parent::update($repo, $initial, $target);
         $this->installStandards($repo, $target, $initial ? false : true);
     }
-
 
     /**
      * {@inheritDoc}
