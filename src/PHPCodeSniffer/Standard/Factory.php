@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards;
+namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>

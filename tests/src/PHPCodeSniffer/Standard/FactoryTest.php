@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\PHPCodeSniffer\Standards;
+namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\PHPCodeSniffer\Standard;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
@@ -21,10 +21,10 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\PHPCodeSniffer\Standards;
  * 02110-1301, USA.
  */
 
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Factory;
 
 /**
- * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory
+ * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Factory
  */
 class FactoryTest extends \PHPUnit_Framework_TestCase
 {
