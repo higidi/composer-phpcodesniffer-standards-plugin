@@ -49,6 +49,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $standard = $this->fixture->create('foo');
 
-        $this->assertInstanceOf('Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard', $standard);
+        $this->assertInstanceOf('Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Standard', $standard);
     }
 }

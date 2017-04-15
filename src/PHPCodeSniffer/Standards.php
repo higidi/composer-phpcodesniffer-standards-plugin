@@ -2,6 +2,8 @@
 
 namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer;
 
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Standard;
+
 class Standards implements \Iterator
 {
 

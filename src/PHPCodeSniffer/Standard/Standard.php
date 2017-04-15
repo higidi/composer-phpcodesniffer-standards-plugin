@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer;
+namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard;
 
 class Standard
 {

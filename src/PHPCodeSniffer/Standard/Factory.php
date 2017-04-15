@@ -21,8 +21,6 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard;
  * 02110-1301, USA.
  */
 
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard;
-
 /**
  * Standards class factory.
  */

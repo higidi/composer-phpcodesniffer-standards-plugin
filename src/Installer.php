@@ -9,7 +9,7 @@ use Composer\Installer\LibraryInstaller;
 use Composer\Package\PackageInterface;
 use Composer\Repository\InstalledRepositoryInterface;
 use Composer\Util\Filesystem;
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Standard;
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards;
 use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
 use Symfony\Component\Finder\Finder;
