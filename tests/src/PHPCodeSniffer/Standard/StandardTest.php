@@ -40,8 +40,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
         $standard = new Standard($path);
 
         $this->assertSame($name, $standard->getName(), 'getName');
-        $this->assertSame($path, $standard->getPath(), 'getPath');
+        $this->assertSame(realpath($path), $standard->getPath(), 'getPath');
         $this->assertSame($ruleSetXmlPath, $standard->getRuleSetXmlPath(), 'getRuleSetXmlPath');
+    }
+
+    public function testIfStandardPathAccessDeniedExceptionIsThrown()
+    {
+        $this->expectException(
+            'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Exception\StandardPathAccessDeniedException'
+        );
+
+        new Standard('foo');
     }
 
     public function testIfInvalidStandardExceptionIsThrown()

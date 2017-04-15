@@ -3,6 +3,7 @@
 namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard;
 
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Exception\InvalidStandardException;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Exception\StandardPathAccessDeniedException;
 
 class Standard implements StandardInterface
 {
@@ -28,10 +29,13 @@ class Standard implements StandardInterface
      */
     public function __construct($path)
     {
-        $path = rtrim($path, DIRECTORY_SEPARATOR);
-        $pathParts = explode(DIRECTORY_SEPARATOR, $path);
-        $this->name = array_pop($pathParts);
-        $this->path = $path;
+        if (!is_readable($path)) {
+            throw new StandardPathAccessDeniedException(
+                sprintf('Standard path "%s" is not accessable.', $path)
+            );
+        }
+        $this->path = realpath($path);
+        $this->name = basename($this->path);
         $this->ruleSetXmlPath = $path . DIRECTORY_SEPARATOR . 'ruleset.xml';
 
         if (!is_readable($this->ruleSetXmlPath)) {
