@@ -21,7 +21,6 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\PHPCodeSniffer\Standards;
  * 02110-1301, USA.
  */
 
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard;
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory;
 
 /**
@@ -50,6 +49,6 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $standard = $this->fixture->create('foo');
 
-        $this->assertInstanceOf(Standard::class, $standard);
+        $this->assertInstanceOf('Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard', $standard);
     }
 }
