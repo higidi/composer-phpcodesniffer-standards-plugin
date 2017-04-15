@@ -5,10 +5,15 @@ cache:
   paths:
     - vendor/
 
-lint:coding-guideline: &PHP-LINTING
-  image: php:7.0-alpine
+before_script:
+  - apt-get update; apt-get install -y zip unzip
+  - composer install --optimize-autoloader --no-interaction --no-ansi --prefer-dist
+
+lint:coding-guideline:
+  image: tetraweb/php:7.0
   stage: test
   script:
+    - mkdir result
     - ./vendor/bin/phpcs -s -n --report-full=result/phpcs-full.txt --report-diff=result/phpcs-diff.txt --report-summary=result/phpcs-summary.txt
   artifacts:
     when: on_failure
@@ -22,9 +27,6 @@ test:5.3: &PHP-UNITTESTING
   variables:
     TIMEZONE: "Europe/Berlin"
     WITH_XDEBUG: "true"
-  before_script:
-    - apt-get update; apt-get install -y zip unzip
-    - composer install --optimize-autoloader --no-interaction --no-ansi --prefer-dist
   script:
     - ./vendor/bin/phpunit --coverage-text --colors=never
 test:5.4:
