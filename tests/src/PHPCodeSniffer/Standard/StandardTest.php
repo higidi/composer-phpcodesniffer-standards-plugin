@@ -44,21 +44,19 @@ class StandardTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($ruleSetXmlPath, $standard->getRuleSetXmlPath(), 'getRuleSetXmlPath');
     }
 
+    /**
+     * @expectedException \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Exception\StandardPathAccessDeniedException
+     */
     public function testIfStandardPathAccessDeniedExceptionIsThrown()
     {
-        $this->expectException(
-            'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Exception\StandardPathAccessDeniedException'
-        );
-
         new Standard('foo');
     }
 
+    /**
+     * @expectedException \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Exception\InvalidStandardException
+     */
     public function testIfInvalidStandardExceptionIsThrown()
     {
-        $this->expectException(
-            'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Exception\InvalidStandardException'
-        );
-
         $path = implode(
             DIRECTORY_SEPARATOR,
             array(__DIR__, '..', '..', '..', 'Fixtures', 'Standards', 'InvalidStandard')
