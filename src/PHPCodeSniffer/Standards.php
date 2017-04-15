@@ -80,12 +80,10 @@ class Standards implements \Iterator
      */
     protected function getStandardName($standard) {
         if ($standard instanceof Standard) {
-            $standard = $standard->getName();
-        } else {
-            $standard = (string)$standard;
+            return $standard->getName();
         }
 
-        return $standard;
+        return (string)$standard;
     }
 
     /**
