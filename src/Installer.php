@@ -3,9 +3,9 @@
 namespace Higidi\ComposerPhpCSStandardsPlugin;
 
 use Composer\Composer;
+use Composer\IO\IOInterface;
 use Composer\Installer\BinaryInstaller;
 use Composer\Installer\LibraryInstaller;
-use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;
 use Composer\Repository\InstalledRepositoryInterface;
 use Composer\Util\Filesystem;
@@ -78,7 +78,6 @@ class Installer extends LibraryInstaller
         parent::update($repo, $initial, $target);
         $this->installStandards($repo, $target, $initial ? false : true);
     }
-
 
     /**
      * {@inheritDoc}
