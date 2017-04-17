@@ -39,9 +39,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
         $standard = new Standard($path);
 
-        $this->assertSame($name, $standard->getName(), 'getName');
-        $this->assertSame(realpath($path), $standard->getPath(), 'getPath');
-        $this->assertSame($ruleSetXmlPath, $standard->getRuleSetXmlPath(), 'getRuleSetXmlPath');
+        $this->assertSame($name, $standard->getName(), 'The standard instance did not return the expected name.');
+        $this->assertSame(
+            realpath($path),
+            $standard->getPath(),
+            'The standard instance did not return the expected path value.'
+        );
+        $this->assertSame(
+            $ruleSetXmlPath,
+            $standard->getRuleSetXmlPath(),
+            'The standard instance did not return the expected ruleset.xml path value.'
+        );
     }
 
     /**
