@@ -47,7 +47,7 @@ class StandardsFactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateStandard()
     {
-        $paths = [];
+        $paths = array();
         $paths[] = implode(
             DIRECTORY_SEPARATOR,
             array(__DIR__, '..', '..', 'Fixtures', 'Standards', 'Standard1')
