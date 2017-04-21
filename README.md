@@ -18,14 +18,14 @@ Installation
 $ composer require higidi/composer-phpcodesniffer-standards-plugin
 ```
 
-Change the type of your composer package to `php-codesniffer-standards`
+Change the type of your composer package to `phpcodesniffer-standard` (or optional to `phpcodesniffer-standards`, both will work)
 
 Your composer.json should looks like:
 ```json
 {
     "name": "vendor/my-php-codesniffer-standards",
     "description": "My codesniffer standards",
-    "type": "php-codesniffer-standards",
+    "type": "phpcodesniffer-standard",
     "require": {
         "higidi/composer-phpcodesniffer-standards-plugin": "^1.0"
     }
