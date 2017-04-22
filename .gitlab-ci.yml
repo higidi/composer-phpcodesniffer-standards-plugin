@@ -6,7 +6,7 @@ cache:
     - vendor/
 
 before_script:
-  - apt-get update; apt-get install -y zip unzip
+  - apt-get update; apt-get install -y unzip
   - composer install --optimize-autoloader --no-interaction --no-ansi --prefer-dist
 
 lint:coding-guideline:
