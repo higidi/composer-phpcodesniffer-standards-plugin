@@ -21,6 +21,7 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\PHPCodeSniffer;
  * 02110-1301, USA.
  */
 
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Factory as StandardFactory;
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\StandardsFactory;
 
 /**
@@ -33,15 +34,30 @@ class StandardsFactoryTest extends \PHPUnit_Framework_TestCase
      */
     protected $fixture;
 
+    /**
+     * @var StandardFactory|\PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $standardFactoryMock;
+
     protected function setUp()
     {
         parent::setUp();
-        $this->fixture = new StandardsFactory();
+        $this->standardFactoryMock = $this->createMock(
+            'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Factory'
+        );
+        $this->standardFactoryMock
+            ->method('create')
+            ->willReturn(
+                $this->createMock('Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Standard')
+            );
+
+        $this->fixture = new StandardsFactory($this->standardFactoryMock);
     }
 
     protected function tearDown()
     {
         parent::tearDown();
+        unset($this->standardFactoryMock);
         unset($this->fixture);
     }
 
@@ -52,6 +68,11 @@ class StandardsFactoryTest extends \PHPUnit_Framework_TestCase
             DIRECTORY_SEPARATOR,
             array(__DIR__, '..', '..', 'Fixtures', 'Standards', 'Standard1')
         );
+        $this->standardFactoryMock
+            ->expects($this->exactly(count($paths)))
+            ->method('create')
+            ->withConsecutive($paths);
+
         $standards = $this->fixture->create($paths);
 
         $this->assertInstanceOf('Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards', $standards);
