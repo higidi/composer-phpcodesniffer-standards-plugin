@@ -42,13 +42,19 @@ class StandardsFactoryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->standardFactoryMock = $this->createMock(
+        $this->standardFactoryMock = $this->getMock(
             'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Factory'
         );
         $this->standardFactoryMock
             ->method('create')
             ->willReturn(
-                $this->createMock('Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Standard')
+                $this->getMock(
+                    'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Standard',
+                    array(),
+                    array(),
+                    '',
+                    false
+                )
             );
 
         $this->fixture = new StandardsFactory($this->standardFactoryMock);
