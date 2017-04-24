@@ -61,7 +61,7 @@ class Finder
             $paths
         );
 
-        return $this->createStandardsFromPath($paths);
+        return $this->createStandardsFromPaths($paths);
     }
 
     /**
@@ -70,7 +70,7 @@ class Finder
      * @param array $path
      * @return Standards
      */
-    protected function createStandardsFromPath(array $paths)
+    protected function createStandardsFromPaths(array $paths)
     {
         return $this->factory->create($paths);
     }
