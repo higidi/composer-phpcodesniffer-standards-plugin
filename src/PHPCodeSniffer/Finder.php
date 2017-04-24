@@ -36,7 +36,6 @@ class Finder
     protected $factory;
 
     /**
-     * @param SymfonyFinder|null $finder
      * @param StandardsFactory|null $factory
      */
     public function __construct(StandardsFactory $factory = null)
