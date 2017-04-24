@@ -51,7 +51,10 @@ class Finder
      */
     public function in($path)
     {
-        $finder = SymfonyFinder::create()->files()->in($path)->name('ruleset.xml');
+        $finder = $this->getSymfonyFinder()
+            ->in($path)
+            ->files()
+            ->name('ruleset.xml');
         $paths = iterator_to_array($finder, false);
         $paths = array_map(
             function (SplFileInfo $file) {
@@ -61,6 +64,16 @@ class Finder
         );
 
         return $this->createStandardsFromPaths($paths);
+    }
+
+    /**
+     * Creates new symfony finder instance.
+     *
+     * @return SymfonyFinder
+     */
+    protected function getSymfonyFinder()
+    {
+        return SymfonyFinder::create();
     }
 
     /**
