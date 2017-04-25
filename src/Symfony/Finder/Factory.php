@@ -29,7 +29,7 @@ use Symfony\Component\Finder\Finder;
 class Factory
 {
     /**
-     * Creates new symfony finder instance..
+     * Creates new symfony finder instance.
      *
      * @return Finder
      */
