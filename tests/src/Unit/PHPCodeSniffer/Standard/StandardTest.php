@@ -67,7 +67,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     {
         $path = implode(
             DIRECTORY_SEPARATOR,
-            array(__DIR__, '..', '..', '..', 'Fixtures', 'Standards', 'InvalidStandard')
+            array(__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', 'InvalidStandard')
         );
 
         new Standard($path);
