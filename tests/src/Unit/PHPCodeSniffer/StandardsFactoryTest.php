@@ -72,7 +72,7 @@ class StandardsFactoryTest extends \PHPUnit_Framework_TestCase
         $paths = array();
         $paths[] = implode(
             DIRECTORY_SEPARATOR,
-            array(__DIR__, '..', '..', 'Fixtures', 'Standards', 'Standard1')
+            array(__DIR__, '..', '..', '..', 'Fixtures', 'Standards', 'Standard1')
         );
         $this->standardFactoryMock
             ->expects($this->exactly(count($paths)))

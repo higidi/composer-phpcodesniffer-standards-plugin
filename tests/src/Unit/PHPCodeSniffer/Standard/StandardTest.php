@@ -33,7 +33,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
         $name = 'Standard1';
         $path = implode(
             DIRECTORY_SEPARATOR,
-            array(__DIR__, '..', '..', '..', 'Fixtures', 'Standards', $name)
+            array(__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', $name)
         );
         $ruleSetXmlPath = $path . DIRECTORY_SEPARATOR . 'ruleset.xml';
 
