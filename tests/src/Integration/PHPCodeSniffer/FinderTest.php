@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\PHPCodeSniffer\Standard;
+namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Integration\PHPCodeSniffer\Standard;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
@@ -25,7 +25,7 @@ use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Finder;
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\StandardsFactory;
 
 /**
- * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Finder
+ * Integration test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Finder
  */
 class FinderTest extends \PHPUnit_Framework_TestCase
 {
@@ -49,7 +49,7 @@ class FinderTest extends \PHPUnit_Framework_TestCase
             '',
             false
         );
-        $this->fixture = new Finder($this->standardsFactoryMock);
+        $this->fixture = new Finder(null, $this->standardsFactoryMock);
     }
 
     protected function tearDown()
