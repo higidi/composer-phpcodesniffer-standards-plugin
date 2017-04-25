@@ -61,7 +61,8 @@ class Finder
         $finder = $this->getSymfonyFinder()
             ->in($path)
             ->files()
-            ->name('ruleset.xml');
+            ->name('ruleset.xml')
+            ->sortByName();
         $paths = iterator_to_array($finder, false);
         $paths = array_map(
             function (SplFileInfo $file) {
