@@ -34,7 +34,7 @@ class FinderTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Finder
      */
-    protected $fixture;
+    protected $classUnderTesting;
 
     /**
      * @var SymfonyFinderFactory|\PHPUnit_Framework_MockObject_MockObject
@@ -68,13 +68,13 @@ class FinderTest extends \PHPUnit_Framework_TestCase
             '',
             false
         );
-        $this->fixture = new Finder($this->symfonyFinderFactoryMock, $this->standardsFactoryMock);
+        $this->classUnderTesting = new Finder($this->symfonyFinderFactoryMock, $this->standardsFactoryMock);
     }
 
     protected function tearDown()
     {
         parent::tearDown();
-        unset($this->fixture);
+        unset($this->classUnderTesting);
         unset($this->standardsFactoryMock);
     }
 
@@ -114,6 +114,6 @@ class FinderTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('create')
             ->with($expected);
-        $this->fixture->in($path);
+        $this->classUnderTesting->in($path);
     }
 }

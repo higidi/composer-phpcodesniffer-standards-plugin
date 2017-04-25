@@ -31,18 +31,18 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @var Factory
      */
-    protected $fixture;
+    protected $classUnderTesting;
 
     protected function setUp()
     {
         parent::setUp();
-        $this->fixture = new Factory();
+        $this->classUnderTesting = new Factory();
     }
 
     protected function tearDown()
     {
         parent::tearDown();
-        unset($this->fixture);
+        unset($this->classUnderTesting);
     }
 
     public function testCreateStandard()
@@ -51,7 +51,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
             DIRECTORY_SEPARATOR,
             array(__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', 'Standard1')
         );
-        $standard = $this->fixture->create($path);
+        $standard = $this->classUnderTesting->create($path);
 
         $this->assertInstanceOf('Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Standard', $standard);
     }

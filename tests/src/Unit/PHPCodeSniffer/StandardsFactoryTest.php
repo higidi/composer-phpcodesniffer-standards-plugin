@@ -32,7 +32,7 @@ class StandardsFactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @var StandardsFactory
      */
-    protected $fixture;
+    protected $classUnderTesting;
 
     /**
      * @var StandardFactory|\PHPUnit_Framework_MockObject_MockObject
@@ -57,14 +57,14 @@ class StandardsFactoryTest extends \PHPUnit_Framework_TestCase
                 )
             );
 
-        $this->fixture = new StandardsFactory($this->standardFactoryMock);
+        $this->classUnderTesting = new StandardsFactory($this->standardFactoryMock);
     }
 
     protected function tearDown()
     {
         parent::tearDown();
         unset($this->standardFactoryMock);
-        unset($this->fixture);
+        unset($this->classUnderTesting);
     }
 
     public function testCreateStandard()
@@ -79,7 +79,7 @@ class StandardsFactoryTest extends \PHPUnit_Framework_TestCase
             ->method('create')
             ->withConsecutive($paths);
 
-        $standards = $this->fixture->create($paths);
+        $standards = $this->classUnderTesting->create($paths);
 
         $this->assertInstanceOf('Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards', $standards);
     }
