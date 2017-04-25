@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Symfony\Finder;
+namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\Symfony\Finder;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
