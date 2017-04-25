@@ -92,12 +92,10 @@ class FinderTest extends \PHPUnit_Framework_TestCase
                 ->willReturn($this->symfonyFinderMock);
         }
 
-        $splFileInfoMock = $this->getMOck(
+        $splFileInfoMock = $this->getMock(
             'Symfony\Component\Finder\SplFileInfo',
             array(),
-            array(),
-            '',
-            false
+            array(null, null, null)
         );
         $splFileInfoMock
             ->expects($this->once())
