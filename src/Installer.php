@@ -115,6 +115,8 @@ class Installer extends LibraryInstaller
      * @param PackageInterface $package
      * @param bool $override
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     protected function installStandards(
         InstalledRepositoryInterface $repo,
