@@ -23,7 +23,7 @@ lint:php-mass-detection:
   <<: *PHP-LINTING
   script:
     - mkdir result
-    - ./vendor/bin/phpmd src text phpmd.xml > result/phpmd.txt
+    - ./vendor/bin/phpmd src text phpmd.xml | tee result/phpmd.txt
 
 test:5.3: &PHP-UNITTESTING
   image: tetraweb/php:5.3
