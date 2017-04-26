@@ -22,6 +22,7 @@ lint:coding-guideline: &PHP-LINTING
 lint:php-mass-detection:
   <<: *PHP-LINTING
   script:
+    - mkdir result
     - ./vendor/bin/phpmd src text phpmd.xml > result/phpmd.txt
 
 test:5.3: &PHP-UNITTESTING
