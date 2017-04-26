@@ -45,6 +45,8 @@ class Installer extends LibraryInstaller
      * @param string $type
      * @param Filesystem $filesystem
      * @param BinaryInstaller $binaryInstaller
+     *
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public function __construct(
         IOInterface $io,

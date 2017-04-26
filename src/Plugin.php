@@ -32,6 +32,8 @@ class Plugin implements PluginInterface
      * @param IOInterface $io
      *
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public function activate(Composer $composer, IOInterface $io)
     {
