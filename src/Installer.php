@@ -66,12 +66,12 @@ class Installer extends LibraryInstaller
         if (!parent::isInstalled($repo, $package)) {
             return false;
         }
-        $sourceStandards = $this->getSourceStandards($package);
-        $destinationStandards = $this->getDestinationStandards($repo);
+        $srcStandards = $this->getSourceStandards($package);
+        $dstStandards = $this->getDestinationStandards($repo);
 
-        foreach ($sourceStandards as $sourceStandard) {
-            if (!$destinationStandards->hasStandard($sourceStandard)
-                || !$this->compareStandards($sourceStandard, $destinationStandards->getStandard($sourceStandard))
+        foreach ($srcStandards as $srcStandard) {
+            if (!$dstStandards->hasStandard($srcStandard)
+                || !$this->compareStandards($srcStandard, $dstStandards->getStandard($srcStandard))
             ) {
                 return false;
             }
@@ -122,14 +122,14 @@ class Installer extends LibraryInstaller
         $override = false
     ) {
         $filesystem = new SymfonyFilesystem();
-        $sourceStandards = $this->getSourceStandards($package);
-        $destStandardsBasePath = $this->getPHPCodeSnifferStandardsBasePath($repo);
+        $srcStandards = $this->getSourceStandards($package);
+        $dstStdBasePath = $this->getPHPCodeSnifferStandardsBasePath($repo);
         $this->io->writeError('    Installing PHP-CodeSniffer Standards:', false);
-        foreach ($sourceStandards as $sourceStandard) {
-            $this->io->writeError(sprintf(' <info>%s</info>', $sourceStandard->getName()));
-            $sourcePath = $sourceStandard->getPath();
-            $destPath = $destStandardsBasePath . DIRECTORY_SEPARATOR . $sourceStandard->getName();
-            $filesystem->mirror($sourcePath, $destPath, null, array('override' => $override));
+        foreach ($srcStandards as $srcStandard) {
+            $this->io->writeError(sprintf(' <info>%s</info>', $srcStandard->getName()));
+            $srcPath = $srcStandard->getPath();
+            $dstPath = $dstStdBasePath . DIRECTORY_SEPARATOR . $srcStandard->getName();
+            $filesystem->mirror($srcPath, $dstPath, null, array('override' => $override));
         }
     }
 
@@ -140,17 +140,17 @@ class Installer extends LibraryInstaller
      */
     protected function removeStandards(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
-        $sourceStandards = $this->getSourceStandards($package);
-        $destinationStandards = $this->getDestinationStandards($repo);
+        $srcStandards = $this->getSourceStandards($package);
+        $dstStandards = $this->getDestinationStandards($repo);
         $this->io->writeError('    Removing PHP-CodeSniffer Standards:', false);
-        foreach ($sourceStandards as $sourceStandard) {
-            if (!$destinationStandards->hasStandard($sourceStandard)) {
+        foreach ($srcStandards as $srcStandard) {
+            if (!$dstStandards->hasStandard($srcStandard)) {
                 continue;
             }
-            $this->io->writeError(sprintf(' <info>%s</info>', $sourceStandard->getName()));
-            $destinationStandard = $destinationStandards->getStandard($sourceStandard);
+            $this->io->writeError(sprintf(' <info>%s</info>', $srcStandard->getName()));
+            $dstStandard = $dstStandards->getStandard($srcStandard);
 
-            $this->filesystem->removeDirectory($destinationStandard->getPath());
+            $this->filesystem->removeDirectory($dstStandard->getPath());
         }
     }
 
