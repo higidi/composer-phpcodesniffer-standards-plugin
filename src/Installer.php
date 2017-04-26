@@ -249,10 +249,10 @@ class Installer extends LibraryInstaller
      */
     public function supports($packageType)
     {
-        $secondaryPackageTypes = array('phpcodesniffer-standards');
-        $deprecatedPackageTypes = array('php-codesniffer-standards');
+        $secondaryTypes = array('phpcodesniffer-standards');
+        $deprecatedTypes = array('php-codesniffer-standards');
 
         return parent::supports($packageType)
-            || in_array($packageType, array_merge($secondaryPackageTypes, $deprecatedPackageTypes));
+            || in_array($packageType, array_merge($secondaryTypes, $deprecatedTypes));
     }
 }
