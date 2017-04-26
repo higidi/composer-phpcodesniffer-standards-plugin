@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\PHPCodeSniffer;
+namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\PHPCodeSniffer\Standards;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
@@ -21,16 +21,16 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\PHPCodeSniffer;
  * 02110-1301, USA.
  */
 
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Factory as StandardFactory;
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\StandardsFactory;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Factory as StandardFactory;
 
 /**
- * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\StandardsFactory
+ * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\StandardsFactory
  */
-class StandardsFactoryTest extends \PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var StandardsFactory
+     * @var Factory
      */
     protected $classUnderTesting;
 
@@ -43,13 +43,13 @@ class StandardsFactoryTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->standardFactoryMock = $this->getMock(
-            'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Factory'
+            'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Factory'
         );
         $this->standardFactoryMock
             ->method('create')
             ->willReturn(
                 $this->getMock(
-                    'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Standard',
+                    'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Standard',
                     array(),
                     array(),
                     '',
@@ -57,7 +57,7 @@ class StandardsFactoryTest extends \PHPUnit_Framework_TestCase
                 )
             );
 
-        $this->classUnderTesting = new StandardsFactory($this->standardFactoryMock);
+        $this->classUnderTesting = new Factory($this->standardFactoryMock);
     }
 
     protected function tearDown()
@@ -72,7 +72,7 @@ class StandardsFactoryTest extends \PHPUnit_Framework_TestCase
         $paths = array();
         $paths[] = implode(
             DIRECTORY_SEPARATOR,
-            array(__DIR__, '..', '..', '..', 'Fixtures', 'Standards', 'Standard1')
+            array(__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', 'Standard1')
         );
         $this->standardFactoryMock
             ->expects($this->exactly(count($paths)))
@@ -81,6 +81,6 @@ class StandardsFactoryTest extends \PHPUnit_Framework_TestCase
 
         $standards = $this->classUnderTesting->create($paths);
 
-        $this->assertInstanceOf('Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards', $standards);
+        $this->assertInstanceOf('Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standards', $standards);
     }
 }

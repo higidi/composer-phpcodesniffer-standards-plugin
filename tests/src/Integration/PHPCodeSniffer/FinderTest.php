@@ -22,7 +22,7 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Integration\PHPCodeSniffer\S
  */
 
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Finder;
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\StandardsFactory;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory;
 
 /**
  * Integration test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Finder
@@ -35,7 +35,7 @@ class FinderTest extends \PHPUnit_Framework_TestCase
     protected $fixture;
 
     /**
-     * @var StandardsFactory|\PHPUnit_Framework_MockObject_MockObject
+     * @var Factory|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $standardsFactoryMock;
 
@@ -43,7 +43,7 @@ class FinderTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
         $this->standardsFactoryMock = $this->getMock(
-            'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\StandardsFactory',
+            'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory',
             array(),
             array(),
             '',

@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard;
+namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Exception;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
@@ -22,18 +22,8 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard;
  */
 
 /**
- * Standards class factory.
+ * Invalid standard exception.
  */
-class Factory
+class InvalidStandardException extends \InvalidArgumentException
 {
-    /**
-     * Creates PHPCodeSniffer standard from path.
-     *
-     * @param string $path Path to the PHPCodeSniffer standard.
-     * @return Standard PHPCodeSniffer standard object.
-     */
-    public function create($path)
-    {
-        return new Standard($path);
-    }
 }

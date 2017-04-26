@@ -21,6 +21,8 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer;
  * 02110-1301, USA.
  */
 
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standards;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory;
 use Higidi\ComposerPhpCSStandardsPlugin\Symfony\Finder\Factory as FinderFactory;
 use Symfony\Component\Finder\Finder as SymfonyFinder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -36,18 +38,18 @@ class Finder
     protected $finderFactory;
 
     /**
-     * @var StandardsFactory
+     * @var Factory
      */
     protected $factory;
 
     /**
      * @param FinderFactory|null $finderFactory
-     * @param StandardsFactory|null $factory
+     * @param Factory|null $factory
      */
-    public function __construct(FinderFactory $finderFactory = null, StandardsFactory $factory = null)
+    public function __construct(FinderFactory $finderFactory = null, Factory $factory = null)
     {
         $this->finderFactory = $finderFactory ?: new FinderFactory();
-        $this->factory = $factory ?: new StandardsFactory();
+        $this->factory = $factory ?: new Factory();
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Exception;
+namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Exception;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
@@ -22,8 +22,8 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Exception;
  */
 
 /**
- * Invalid standard exception.
+ * Standard path access denied exception.
  */
-class InvalidStandardException extends \InvalidArgumentException
+class StandardPathAccessDeniedException extends \UnexpectedValueException
 {
 }

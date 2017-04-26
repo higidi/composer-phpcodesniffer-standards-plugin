@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer;
+namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
@@ -21,7 +21,7 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer;
  * 02110-1301, USA.
  */
 
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\StandardInterface;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\StandardInterface;
 
 class Standards implements \Iterator
 {

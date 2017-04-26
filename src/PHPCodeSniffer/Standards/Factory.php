@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer;
+namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
@@ -21,12 +21,12 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer;
  * 02110-1301, USA.
  */
 
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Factory as StandardFactory;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Factory as StandardFactory;
 
 /**
  * Standards class factory.
  */
-class StandardsFactory
+class Factory
 {
     /**
      * @var StandardFactory

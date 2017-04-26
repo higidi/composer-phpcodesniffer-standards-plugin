@@ -29,8 +29,8 @@ use Composer\Package\PackageInterface;
 use Composer\Repository\InstalledRepositoryInterface;
 use Composer\Util\Filesystem;
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Finder;
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Standard;
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Standard;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standards;
 use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
 
 class Installer extends LibraryInstaller

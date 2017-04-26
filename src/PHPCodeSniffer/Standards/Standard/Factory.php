@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard;
+namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
@@ -22,28 +22,18 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard;
  */
 
 /**
- * Interface for PHPCodeSniffer standards.
+ * Standards class factory.
  */
-interface StandardInterface
+class Factory
 {
     /**
-     * Get the name of the PHPCodeSniffer standard.
+     * Creates PHPCodeSniffer standard from path.
      *
-     * @return string The name of the PHPCodeSniffer standard.
+     * @param string $path Path to the PHPCodeSniffer standard.
+     * @return Standard PHPCodeSniffer standard object.
      */
-    public function getName();
-
-    /**
-     * Get the path to PHPCodeSniffer standard.
-     *
-     * @return string The path to the PHPCodeSniffer standard.
-     */
-    public function getPath();
-
-    /**
-     * Get the path to the PHPCodeSniffer ruleset.xml file.
-     *
-     * @return string The path to the PHPCodeSniffer ruleset.xml file.
-     */
-    public function getRuleSetXmlPath();
+    public function create($path)
+    {
+        return new Standard($path);
+    }
 }

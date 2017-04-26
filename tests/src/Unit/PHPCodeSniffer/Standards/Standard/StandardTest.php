@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\PHPCodeSniffer\Standard;
+namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\PHPCodeSniffer\Standards\Standard;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
@@ -21,10 +21,10 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\PHPCodeSniffer\Standard
  * 02110-1301, USA.
  */
 
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Standard;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Standard;
 
 /**
- * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Standard
+ * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Standard
  */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
@@ -33,7 +33,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
         $name = 'Standard1';
         $path = implode(
             DIRECTORY_SEPARATOR,
-            array(__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', $name)
+            array(__DIR__, '..', '..', '..', '..', '..', 'Fixtures', 'Standards', $name)
         );
         $ruleSetXmlPath = $path . DIRECTORY_SEPARATOR . 'ruleset.xml';
 
@@ -53,7 +53,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Exception\StandardPathAccessDeniedException
+     * @expectedException \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Exception\StandardPathAccessDeniedException
      */
     public function testIfStandardPathAccessDeniedExceptionIsThrown()
     {
@@ -61,13 +61,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Exception\InvalidStandardException
+     * @expectedException \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Exception\InvalidStandardException
      */
     public function testIfInvalidStandardExceptionIsThrown()
     {
         $path = implode(
             DIRECTORY_SEPARATOR,
-            array(__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', 'InvalidStandard')
+            array(__DIR__, '..', '..', '..', '..', '..', 'Fixtures', 'Standards', 'InvalidStandard')
         );
 
         new Standard($path);

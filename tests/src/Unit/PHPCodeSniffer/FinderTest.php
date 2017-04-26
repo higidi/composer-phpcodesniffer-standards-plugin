@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\PHPCodeSniffer\Standard;
+namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\PHPCodeSniffer\Standards\Standard;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
@@ -22,7 +22,7 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\PHPCodeSniffer\Standard
  */
 
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Finder;
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\StandardsFactory;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory;
 use Higidi\ComposerPhpCSStandardsPlugin\Symfony\Finder\Factory as SymfonyFinderFactory;
 use Symfony\Component\Finder\Finder as SymfonyFinder;
 
@@ -47,7 +47,7 @@ class FinderTest extends \PHPUnit_Framework_TestCase
     protected $symfonyFinderMock;
 
     /**
-     * @var StandardsFactory|\PHPUnit_Framework_MockObject_MockObject
+     * @var Factory|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $standardsFactoryMock;
 
@@ -62,7 +62,7 @@ class FinderTest extends \PHPUnit_Framework_TestCase
             ->method('create')
             ->willReturn($this->symfonyFinderMock);
         $this->standardsFactoryMock = $this->getMock(
-            'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\StandardsFactory',
+            'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory',
             array(),
             array(),
             '',

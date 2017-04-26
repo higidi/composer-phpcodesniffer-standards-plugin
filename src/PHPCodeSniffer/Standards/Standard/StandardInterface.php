@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Exception;
+namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
@@ -22,8 +22,28 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard\Exception;
  */
 
 /**
- * Standard path access denied exception.
+ * Interface for PHPCodeSniffer standards.
  */
-class StandardPathAccessDeniedException extends \UnexpectedValueException
+interface StandardInterface
 {
+    /**
+     * Get the name of the PHPCodeSniffer standard.
+     *
+     * @return string The name of the PHPCodeSniffer standard.
+     */
+    public function getName();
+
+    /**
+     * Get the path to PHPCodeSniffer standard.
+     *
+     * @return string The path to the PHPCodeSniffer standard.
+     */
+    public function getPath();
+
+    /**
+     * Get the path to the PHPCodeSniffer ruleset.xml file.
+     *
+     * @return string The path to the PHPCodeSniffer ruleset.xml file.
+     */
+    public function getRuleSetXmlPath();
 }
