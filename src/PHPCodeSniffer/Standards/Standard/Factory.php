@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin;
+namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
@@ -21,23 +21,19 @@ namespace Higidi\ComposerPhpCSStandardsPlugin;
  * 02110-1301, USA.
  */
 
-use Composer\Composer;
-use Composer\IO\IOInterface;
-use Composer\Plugin\PluginInterface;
-
-class Plugin implements PluginInterface
+/**
+ * Standards class factory.
+ */
+class Factory
 {
     /**
-     * @param Composer $composer
-     * @param IOInterface $io
+     * Creates PHPCodeSniffer standard from path.
      *
-     * @return void
-     *
-     * @SuppressWarnings(PHPMD.ShortVariable)
+     * @param string $path Path to the PHPCodeSniffer standard.
+     * @return Standard PHPCodeSniffer standard object.
      */
-    public function activate(Composer $composer, IOInterface $io)
+    public function create($path)
     {
-        $installer = new Installer($io, $composer);
-        $composer->getInstallationManager()->addInstaller($installer);
+        return new Standard($path);
     }
 }

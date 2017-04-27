@@ -1,17 +1,38 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer;
+namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards;
+
+/*
+ * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301, USA.
+ */
+
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\StandardInterface;
 
 class Standards implements \Iterator
 {
 
     /**
-     * @var array|Standard[]
+     * @var StandardInterface[]
      */
     protected $standards;
 
     /**
-     * @param array $standards
+     * @param StandardInterface[] $standards
      */
     public function __construct(array $standards = array())
     {
@@ -21,10 +42,10 @@ class Standards implements \Iterator
     }
 
     /**
-     * @param Standard $standard
+     * @param StandardInterface $standard
      * @return $this
      */
-    public function addStandard(Standard $standard)
+    public function addStandard(StandardInterface $standard)
     {
         $this->standards[$standard->getName()] = $standard;
 
@@ -32,7 +53,7 @@ class Standards implements \Iterator
     }
 
     /**
-     * @param string|Standard $standard
+     * @param string|StandardInterface $standard
      * @return bool
      */
     public function hasStandard($standard)
@@ -41,7 +62,7 @@ class Standards implements \Iterator
     }
 
     /**
-     * @param string|Standard $standard
+     * @param string|StandardInterface $standard
      * @return $this
      */
     public function removeStandard($standard)
@@ -54,8 +75,8 @@ class Standards implements \Iterator
     }
 
     /**
-     * @param string|Standard $standard
-     * @return Standard|null
+     * @param string|StandardInterface $standard
+     * @return StandardInterface|null
      */
     public function getStandard($standard)
     {
@@ -67,7 +88,7 @@ class Standards implements \Iterator
     }
 
     /**
-     * @return array|Standard[]
+     * @return array|StandardInterface[]
      */
     public function getStandards()
     {
@@ -75,23 +96,22 @@ class Standards implements \Iterator
     }
 
     /**
-     * @param string|Standard $standard
+     * @param string|StandardInterface $standard
      * @return string
      */
-    protected function getStandardName($standard) {
-        if ($standard instanceof Standard) {
-            $standard = $standard->getName();
-        } else {
-            $standard = (string)$standard;
+    protected function getStandardName($standard)
+    {
+        if ($standard instanceof StandardInterface) {
+            return $standard->getName();
         }
 
-        return $standard;
+        return (string)$standard;
     }
 
     /**
      * Return the current element
      * @link http://php.net/manual/en/iterator.current.php
-     * @return Standard Can return any type.
+     * @return StandardInterface Can return any type.
      * @since 5.0.0
      */
     public function current()

@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin;
+namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\Symfony\Finder;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
@@ -21,23 +21,18 @@ namespace Higidi\ComposerPhpCSStandardsPlugin;
  * 02110-1301, USA.
  */
 
-use Composer\Composer;
-use Composer\IO\IOInterface;
-use Composer\Plugin\PluginInterface;
+use Higidi\ComposerPhpCSStandardsPlugin\Symfony\Finder\Factory;
 
-class Plugin implements PluginInterface
+/**
+ * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\Symfony\Finder\Factory
+ */
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @param Composer $composer
-     * @param IOInterface $io
-     *
-     * @return void
-     *
-     * @SuppressWarnings(PHPMD.ShortVariable)
-     */
-    public function activate(Composer $composer, IOInterface $io)
+    public function testCreateFinder()
     {
-        $installer = new Installer($io, $composer);
-        $composer->getInstallationManager()->addInstaller($installer);
+        $factory = new Factory();
+        $finder = $factory->create();
+
+        $this->assertInstanceOf('Symfony\Component\Finder\Finder', $finder);
     }
 }

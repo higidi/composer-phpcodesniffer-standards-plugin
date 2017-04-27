@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin;
+namespace Higidi\ComposerPhpCSStandardsPlugin\Symfony\Finder;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
@@ -21,23 +21,22 @@ namespace Higidi\ComposerPhpCSStandardsPlugin;
  * 02110-1301, USA.
  */
 
-use Composer\Composer;
-use Composer\IO\IOInterface;
-use Composer\Plugin\PluginInterface;
+use Symfony\Component\Finder\Finder;
 
-class Plugin implements PluginInterface
+/**
+ * Symfony finder factory class.
+ */
+class Factory
 {
     /**
-     * @param Composer $composer
-     * @param IOInterface $io
+     * Creates new symfony finder instance.
      *
-     * @return void
+     * @return Finder
      *
-     * @SuppressWarnings(PHPMD.ShortVariable)
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
-    public function activate(Composer $composer, IOInterface $io)
+    public function create()
     {
-        $installer = new Installer($io, $composer);
-        $composer->getInstallationManager()->addInstaller($installer);
+        return Finder::create();
     }
 }

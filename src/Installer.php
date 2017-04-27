@@ -2,6 +2,25 @@
 
 namespace Higidi\ComposerPhpCSStandardsPlugin;
 
+/*
+ * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301, USA.
+ */
+
 use Composer\Composer;
 use Composer\Installer\BinaryInstaller;
 use Composer\Installer\LibraryInstaller;
@@ -9,14 +28,19 @@ use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;
 use Composer\Repository\InstalledRepositoryInterface;
 use Composer\Util\Filesystem;
-use Symfony\Component\Finder\Finder;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Finder;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Standard;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standards;
 use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard;
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards;
 
 class Installer extends LibraryInstaller
 {
-    const TYPE = 'php-codesniffer-standards';
+    const TYPE = 'phpcodesniffer-standard';
+
+    /**
+     * @var Finder
+     */
+    protected $finder;
 
     /**
      * Initializes library installer.
@@ -26,15 +50,19 @@ class Installer extends LibraryInstaller
      * @param string $type
      * @param Filesystem $filesystem
      * @param BinaryInstaller $binaryInstaller
+     *
+     * @SuppressWarnings(PHPMD.ShortVariable)
      */
     public function __construct(
         IOInterface $io,
         Composer $composer,
         $type = self::TYPE,
         Filesystem $filesystem = null,
-        BinaryInstaller $binaryInstaller = null
+        BinaryInstaller $binaryInstaller = null,
+        Finder $finder
     ) {
         parent::__construct($io, $composer, $type, $filesystem, $binaryInstaller);
+        $this->finder = $finder ?: new Finder();
     }
 
     /**
@@ -42,23 +70,21 @@ class Installer extends LibraryInstaller
      */
     public function isInstalled(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
-        $isInstalled = parent::isInstalled($repo, $package);
-        if (!$isInstalled) {
-            return $isInstalled;
+        if (!parent::isInstalled($repo, $package)) {
+            return false;
         }
-        $sourceStandards = $this->getSourceStandards($package);
-        $destinationStandards = $this->getDestinationStandards($repo);
+        $srcStandards = $this->getSourceStandards($package);
+        $dstStandards = $this->getDestinationStandards($repo);
 
-        foreach ($sourceStandards as $sourceStandard) {
-            if (!$destinationStandards->hasStandard($sourceStandard)
-                || !$this->compareStandards($sourceStandard, $destinationStandards->getStandard($sourceStandard))
+        foreach ($srcStandards as $srcStandard) {
+            if (!$dstStandards->hasStandard($srcStandard)
+                || !$this->compareStandards($srcStandard, $dstStandards->getStandard($srcStandard))
             ) {
-                $isInstalled = false;
-                break;
+                return false;
             }
         }
 
-        return $isInstalled;
+        return true;
     }
 
     /**
@@ -79,14 +105,13 @@ class Installer extends LibraryInstaller
         $this->installStandards($repo, $target, $initial ? false : true);
     }
 
-
     /**
      * {@inheritDoc}
      */
     public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
         if (!$repo->hasPackage($package)) {
-            throw new \InvalidArgumentException('Package is not installed: '.$package);
+            throw new \InvalidArgumentException('Package is not installed: ' . $package);
         }
         $this->removeStandards($repo, $package);
         parent::uninstall($repo, $package);
@@ -97,18 +122,23 @@ class Installer extends LibraryInstaller
      * @param PackageInterface $package
      * @param bool $override
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
-    protected function installStandards(InstalledRepositoryInterface $repo, PackageInterface $package, $override = false)
-    {
+    protected function installStandards(
+        InstalledRepositoryInterface $repo,
+        PackageInterface $package,
+        $override = false
+    ) {
         $filesystem = new SymfonyFilesystem();
-        $sourceStandards = $this->getSourceStandards($package);
-        $destStandardsBasePath = $this->getPHPCodeSnifferStandardsBasePath($repo);
+        $srcStandards = $this->getSourceStandards($package);
+        $dstStdBasePath = $this->getPHPCodeSnifferStandardsBasePath($repo);
         $this->io->writeError('    Installing PHP-CodeSniffer Standards:', false);
-        foreach ($sourceStandards as $sourceStandard) {
-            $this->io->writeError(sprintf(' <info>%s</info>', $sourceStandard->getName()));
-            $sourcePath = $sourceStandard->getPath();
-            $destPath = $destStandardsBasePath . DIRECTORY_SEPARATOR . $sourceStandard->getName();
-            $filesystem->mirror($sourcePath, $destPath, null, array('override' => $override));
+        foreach ($srcStandards as $srcStandard) {
+            $this->io->writeError(sprintf(' <info>%s</info>', $srcStandard->getName()));
+            $srcPath = $srcStandard->getPath();
+            $dstPath = $dstStdBasePath . DIRECTORY_SEPARATOR . $srcStandard->getName();
+            $filesystem->mirror($srcPath, $dstPath, null, array('override' => $override));
         }
     }
 
@@ -119,17 +149,17 @@ class Installer extends LibraryInstaller
      */
     protected function removeStandards(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
-        $sourceStandards = $this->getSourceStandards($package);
-        $destinationStandards = $this->getDestinationStandards($repo);
+        $srcStandards = $this->getSourceStandards($package);
+        $dstStandards = $this->getDestinationStandards($repo);
         $this->io->writeError('    Removing PHP-CodeSniffer Standards:', false);
-        foreach ($sourceStandards as $sourceStandard) {
-            if (!$destinationStandards->hasStandard($sourceStandard)) {
+        foreach ($srcStandards as $srcStandard) {
+            if (!$dstStandards->hasStandard($srcStandard)) {
                 continue;
             }
-            $this->io->writeError(sprintf(' <info>%s</info>', $sourceStandard->getName()));
-            $destinationStandard = $destinationStandards->getStandard($sourceStandard);
+            $this->io->writeError(sprintf(' <info>%s</info>', $srcStandard->getName()));
+            $dstStandard = $dstStandards->getStandard($srcStandard);
 
-            $this->filesystem->removeDirectory($destinationStandard->getPath());
+            $this->filesystem->removeDirectory($dstStandard->getPath());
         }
     }
 
@@ -176,17 +206,7 @@ class Installer extends LibraryInstaller
      */
     protected function findStandards($basePath)
     {
-        $standards = new Standards();
-        $finder = new Finder();
-        $finder
-            ->in($basePath . '/**/Standards/*/')
-            ->files()->name('ruleset.xml');
-        foreach ($finder as $ruleSetFile) {
-            $standard = new Standard($ruleSetFile->getPath());
-            $standards->addStandard($standard);
-        }
-
-        return $standards;
+        return $this->finder->in($basePath);
     }
 
     /**
@@ -223,5 +243,17 @@ class Installer extends LibraryInstaller
     protected function getPHPCodeSnifferInstallPath(InstalledRepositoryInterface $repo)
     {
         return $this->getInstallPath($this->getPHPCodeSnifferPackage($repo));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function supports($packageType)
+    {
+        $secondaryTypes = array('phpcodesniffer-standards');
+        $deprecatedTypes = array('php-codesniffer-standards');
+
+        return parent::supports($packageType)
+            || in_array($packageType, array_merge($secondaryTypes, $deprecatedTypes));
     }
 }

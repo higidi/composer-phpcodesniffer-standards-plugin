@@ -1,6 +1,6 @@
 <?php
 
-namespace Higidi\ComposerPhpCSStandardsPlugin;
+namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Exception;
 
 /*
  * Copyright (C) 2017  Daniel Hürtgen <daniel@higidi.de>
@@ -21,23 +21,9 @@ namespace Higidi\ComposerPhpCSStandardsPlugin;
  * 02110-1301, USA.
  */
 
-use Composer\Composer;
-use Composer\IO\IOInterface;
-use Composer\Plugin\PluginInterface;
-
-class Plugin implements PluginInterface
+/**
+ * Invalid standard exception.
+ */
+class InvalidStandardException extends \InvalidArgumentException
 {
-    /**
-     * @param Composer $composer
-     * @param IOInterface $io
-     *
-     * @return void
-     *
-     * @SuppressWarnings(PHPMD.ShortVariable)
-     */
-    public function activate(Composer $composer, IOInterface $io)
-    {
-        $installer = new Installer($io, $composer);
-        $composer->getInstallationManager()->addInstaller($installer);
-    }
 }
