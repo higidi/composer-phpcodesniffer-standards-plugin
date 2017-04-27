@@ -85,8 +85,7 @@ class FinderTest extends \PHPUnit_Framework_TestCase
             $path . DIRECTORY_SEPARATOR . 'Standard1',
         );
 
-        $fluentMethods = array('in', 'files', 'name', 'sortByName');
-        foreach ($fluentMethods as $fluentMethod) {
+        foreach (array('in', 'files', 'name', 'sortByName') as $fluentMethod) {
             $this->symfonyFinderMock
                 ->method($fluentMethod)
                 ->willReturn($this->symfonyFinderMock);

@@ -51,8 +51,7 @@ class Factory
     {
         $standards = new Standards();
         foreach ($paths as $path) {
-            $standard = $this->standardFactory->create($path);
-            $standards->addStandard($standard);
+            $standards->addStandard($this->standardFactory->create($path));
         }
 
         return $standards;
