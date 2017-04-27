@@ -32,6 +32,8 @@ class Factory
      * Creates new symfony finder instance.
      *
      * @return Finder
+     *
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function create()
     {
