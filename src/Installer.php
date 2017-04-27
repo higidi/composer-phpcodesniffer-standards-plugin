@@ -22,20 +22,25 @@ namespace Higidi\ComposerPhpCSStandardsPlugin;
  */
 
 use Composer\Composer;
-use Composer\IO\IOInterface;
 use Composer\Installer\BinaryInstaller;
 use Composer\Installer\LibraryInstaller;
+use Composer\IO\IOInterface;
 use Composer\Package\PackageInterface;
 use Composer\Repository\InstalledRepositoryInterface;
 use Composer\Util\Filesystem;
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standard;
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Finder;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Standard;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standards;
 use Symfony\Component\Filesystem\Filesystem as SymfonyFilesystem;
-use Symfony\Component\Finder\Finder;
 
 class Installer extends LibraryInstaller
 {
     const TYPE = 'phpcodesniffer-standard';
+
+    /**
+     * @var Finder
+     */
+    protected $finder;
 
     /**
      * Initializes library installer.
@@ -53,9 +58,11 @@ class Installer extends LibraryInstaller
         Composer $composer,
         $type = self::TYPE,
         Filesystem $filesystem = null,
-        BinaryInstaller $binaryInstaller = null
+        BinaryInstaller $binaryInstaller = null,
+        Finder $finder
     ) {
         parent::__construct($io, $composer, $type, $filesystem, $binaryInstaller);
+        $this->finder = $finder ?: new Finder();
     }
 
     /**
@@ -199,17 +206,7 @@ class Installer extends LibraryInstaller
      */
     protected function findStandards($basePath)
     {
-        $standards = new Standards();
-        $finder = new Finder();
-        $finder
-            ->in($basePath . '/**/Standards/*/')
-            ->files()->name('ruleset.xml');
-        foreach ($finder as $ruleSetFile) {
-            $standard = new Standard($ruleSetFile->getPath());
-            $standards->addStandard($standard);
-        }
-
-        return $standards;
+        return $this->finder->in($basePath);
     }
 
     /**
