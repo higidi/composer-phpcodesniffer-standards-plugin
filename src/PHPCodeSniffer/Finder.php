@@ -25,7 +25,6 @@ use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standards;
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory;
 use Higidi\ComposerPhpCSStandardsPlugin\Symfony\Finder\Factory as FinderFactory;
 use Symfony\Component\Finder\Finder as SymfonyFinder;
-use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * Standards finder class.
@@ -67,7 +66,7 @@ class Finder
             ->sortByName();
         $paths = iterator_to_array($finder, false);
         $paths = array_map(
-            function (SplFileInfo $file) {
+            function (\SplFileInfo $file) {
                 return $file->getPath();
             },
             $paths
