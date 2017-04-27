@@ -56,6 +56,8 @@ class Finder
      *
      * @param string $path
      * @return Standards
+     *
+     * @SuppressWarnings(PHPMD.ShortMethodName)
      */
     public function in($path)
     {
