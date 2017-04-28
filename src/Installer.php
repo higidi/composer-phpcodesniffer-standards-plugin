@@ -59,7 +59,7 @@ class Installer extends LibraryInstaller
         $type = self::TYPE,
         Filesystem $filesystem = null,
         BinaryInstaller $binaryInstaller = null,
-        Finder $finder
+        Finder $finder = null
     ) {
         parent::__construct($io, $composer, $type, $filesystem, $binaryInstaller);
         $this->finder = $finder ?: new Finder();
