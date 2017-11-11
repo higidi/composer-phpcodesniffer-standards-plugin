@@ -42,13 +42,11 @@ class FinderTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->standardsFactoryMock = $this->getMock(
-            'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory',
-            array(),
-            array(),
-            '',
-            false
-        );
+        $this->standardsFactoryMock = $this->getMockBuilder(
+            'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory'
+        )
+            ->disableOriginalConstructor()
+            ->getMock();
         $this->fixture = new Finder(null, $this->standardsFactoryMock);
     }
 
@@ -66,6 +64,8 @@ class FinderTest extends \PHPUnit_Framework_TestCase
             $path . DIRECTORY_SEPARATOR . 'Standard1',
             $path . DIRECTORY_SEPARATOR . 'Standard2',
             $path . DIRECTORY_SEPARATOR . 'Standard3',
+            $path . DIRECTORY_SEPARATOR . 'standard_with_ruleset',
+            $path . DIRECTORY_SEPARATOR . 'standard_with_ruleset_without_name',
         );
 
         $this->standardsFactoryMock

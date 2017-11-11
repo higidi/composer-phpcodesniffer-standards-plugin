@@ -23,6 +23,7 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\PHPCodeSniffer\Standard
 
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory;
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Factory as StandardFactory;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Standard;
 
 /**
  * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\StandardsFactory
@@ -42,19 +43,15 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->standardFactoryMock = $this->getMock(
+        $this->standardFactoryMock = $this->getMockBuilder(
             'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Factory'
-        );
+        )->getMock();
         $this->standardFactoryMock
             ->method('create')
             ->willReturn(
-                $this->getMock(
-                    'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Standard',
-                    array(),
-                    array(),
-                    '',
-                    false
-                )
+                $this->getMockBuilder('Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Standard')
+                    ->disableOriginalConstructor()
+                    ->getMock()
             );
 
         $this->classUnderTesting = new Factory($this->standardFactoryMock);
