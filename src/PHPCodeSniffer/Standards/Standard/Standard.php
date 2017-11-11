@@ -77,7 +77,8 @@ class Standard implements StandardInterface
     {
         try {
             $ruleSet = new \SimpleXMLElement(file_get_contents($ruleSetXmlPath));
-            $name = trim($ruleSet->attributes()['name']);
+            $attributes = $ruleSet->attributes();
+            $name = trim($attributes['name']);
             if ($name !== '') {
                 return $name;
             }
