@@ -54,20 +54,18 @@ class FinderTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->symfonyFinderFactoryMock = $this->getMock(
+        $this->symfonyFinderFactoryMock = $this->getMockBuilder(
             'Higidi\ComposerPhpCSStandardsPlugin\Symfony\Finder\Factory'
-        );
-        $this->symfonyFinderMock = $this->getMock('Symfony\Component\Finder\Finder');
+        )->getMock();
+        $this->symfonyFinderMock = $this->getMockBuilder('Symfony\Component\Finder\Finder')->getMock();
         $this->symfonyFinderFactoryMock
             ->method('create')
             ->willReturn($this->symfonyFinderMock);
-        $this->standardsFactoryMock = $this->getMock(
-            'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory',
-            array(),
-            array(),
-            '',
-            false
-        );
+        $this->standardsFactoryMock = $this->getMockBuilder(
+            'Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory'
+        )
+            ->disableOriginalConstructor()
+            ->getMock();
         $this->classUnderTesting = new Finder($this->symfonyFinderFactoryMock, $this->standardsFactoryMock);
     }
 
@@ -91,11 +89,9 @@ class FinderTest extends \PHPUnit_Framework_TestCase
                 ->willReturn($this->symfonyFinderMock);
         }
 
-        $splFileInfoMock = $this->getMock(
-            'Symfony\Component\Finder\SplFileInfo',
-            array(),
-            array(null, null, null)
-        );
+        $splFileInfoMock = $this->getMockBuilder('Symfony\Component\Finder\SplFileInfo')
+            ->setConstructorArgs(array(null, null, null))
+            ->getMock();
         $splFileInfoMock
             ->expects($this->once())
             ->method('getPath')
