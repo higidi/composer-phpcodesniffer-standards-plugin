@@ -57,13 +57,29 @@ class Standard implements StandardInterface
             );
         }
         $this->path = realpath($path);
-        $this->name = basename($this->path);
         $this->ruleSetXmlPath = $path . DIRECTORY_SEPARATOR . static::RULESET_FILENAME;
+        $this->name = $this->getNameFromRuleSet($this->ruleSetXmlPath);
 
         if (!is_readable($this->ruleSetXmlPath)) {
             throw new InvalidStandardException(
                 sprintf('Standard "%s" doesn\'t contain a "ruleset.xml" file.', $this->name)
             );
+        }
+    }
+
+    /**
+     * Fetch PHPCodeSniffer standard name from ruleset.xml.
+     *
+     * @param string $ruleSetXmlPath The absolute path to ruleset.xml.
+     * @return string The name of the PHPCodeSniffer standard.
+     */
+    protected function getNameFromRuleSet($ruleSetXmlPath)
+    {
+        try {
+            $ruleSet = new \SimpleXMLElement(file_get_contents($ruleSetXmlPath));
+            return (string) $ruleSet->attributes()['name'];
+        } catch (\Exception $e) {
+            return basename(dirname($ruleSetXmlPath));
         }
     }
 
