@@ -28,18 +28,24 @@ use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Standa
  */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
-    public function testStandard()
+    /**
+     * @dataProvider differentStandards
+     */
+    public function testStandard($standardName, $expectedName)
     {
-        $name = 'Standard1';
         $path = implode(
             DIRECTORY_SEPARATOR,
-            array(__DIR__, '..', '..', '..', '..', '..', 'Fixtures', 'Standards', $name)
+            array(__DIR__, '..', '..', '..', '..', '..', 'Fixtures', 'Standards', $standardName)
         );
         $ruleSetXmlPath = $path . DIRECTORY_SEPARATOR . 'ruleset.xml';
 
         $standard = new Standard($path);
 
-        $this->assertSame($name, $standard->getName(), 'The standard instance did not return the expected name.');
+        $this->assertSame(
+            $expectedName,
+            $standard->getName(),
+            'The standard instance did not return the expected name.'
+        );
         $this->assertSame(
             realpath($path),
             $standard->getPath(),
@@ -50,6 +56,24 @@ class StandardTest extends \PHPUnit_Framework_TestCase
             $standard->getRuleSetXmlPath(),
             'The standard instance did not return the expected ruleset.xml path value.'
         );
+    }
+
+    public function differentStandards()
+    {
+        return [
+            'No Ruleset' => [
+                'Standard1',
+                'Standard1',
+            ],
+            'Ruleset with name' => [
+                'standard_with_ruleset',
+                'CustomStandard',
+            ],
+            'Ruleset without name' => [
+                'standard_with_ruleset_without_name',
+                'standard_with_ruleset_without_name',
+            ],
+        ];
     }
 
     /**

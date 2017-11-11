@@ -77,10 +77,15 @@ class Standard implements StandardInterface
     {
         try {
             $ruleSet = new \SimpleXMLElement(file_get_contents($ruleSetXmlPath));
-            return (string) $ruleSet->attributes()['name'];
+            $name = trim($ruleSet->attributes()['name']);
+            if ($name !== '') {
+                return $name;
+            }
         } catch (\Exception $e) {
-            return basename(dirname($ruleSetXmlPath));
+            // Nothing todo, use folder name.
         }
+
+        return basename(dirname($ruleSetXmlPath));
     }
 
     /**
