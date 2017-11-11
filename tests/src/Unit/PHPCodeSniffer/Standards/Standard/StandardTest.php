@@ -60,20 +60,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
     public function differentStandards()
     {
-        return [
-            'No Ruleset' => [
+        return array(
+            'No Ruleset' => array(
                 'Standard1',
                 'Standard1',
-            ],
-            'Ruleset with name' => [
+            ),
+            'Ruleset with name' => array(
                 'standard_with_ruleset',
                 'CustomStandard',
-            ],
-            'Ruleset without name' => [
+            ),
+            'Ruleset without name' => array(
                 'standard_with_ruleset_without_name',
                 'standard_with_ruleset_without_name',
-            ],
-        ];
+            ),
+        );
     }
 
     /**
