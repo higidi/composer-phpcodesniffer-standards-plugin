@@ -24,7 +24,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Higidi\\ComposerPhpCSStandardsPlugin\\Tests\\": "tests/src/"
+      "Higidi\\ComposerPhpCSStandardsPlugin\\Tests\\": "tests/"
     }
   },
   "require": {

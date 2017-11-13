@@ -59,7 +59,7 @@ class FinderTest extends \PHPUnit_Framework_TestCase
 
     public function testFinder()
     {
-        $path = realpath(implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', '..', '..', 'Fixtures', 'Standards')));
+        $path = realpath(implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', '..', 'Fixtures', 'Standards')));
         $expected = array(
             $path . DIRECTORY_SEPARATOR . 'Standard1',
             $path . DIRECTORY_SEPARATOR . 'Standard2',

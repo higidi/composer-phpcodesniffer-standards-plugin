@@ -35,7 +35,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     {
         $path = implode(
             DIRECTORY_SEPARATOR,
-            array(__DIR__, '..', '..', '..', '..', '..', 'Fixtures', 'Standards', $standardName)
+            array(__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', $standardName)
         );
         $ruleSetXmlPath = $path . DIRECTORY_SEPARATOR . 'ruleset.xml';
 
@@ -91,7 +91,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
     {
         $path = implode(
             DIRECTORY_SEPARATOR,
-            array(__DIR__, '..', '..', '..', '..', '..', 'Fixtures', 'Standards', 'InvalidStandard')
+            array(__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', 'InvalidStandard')
         );
 
         new Standard($path);

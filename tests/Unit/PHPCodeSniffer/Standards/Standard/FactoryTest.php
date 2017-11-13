@@ -49,7 +49,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $path = implode(
             DIRECTORY_SEPARATOR,
-            array(__DIR__, '..', '..', '..', '..', '..', 'Fixtures', 'Standards', 'Standard1')
+            array(__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', 'Standard1')
         );
         $standard = $this->classUnderTesting->create($path);
 
