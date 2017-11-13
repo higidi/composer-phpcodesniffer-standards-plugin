@@ -23,11 +23,12 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Integration\PHPCodeSniffer\S
 
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Finder;
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Integration test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Finder
  */
-class FinderTest extends \PHPUnit_Framework_TestCase
+class FinderTest extends TestCase
 {
     /**
      * @var Finder

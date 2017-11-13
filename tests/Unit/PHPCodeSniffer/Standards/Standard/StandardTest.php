@@ -22,11 +22,12 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\PHPCodeSniffer\Standard
  */
 
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Standard;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Standard
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends TestCase
 {
     /**
      * @dataProvider differentStandards

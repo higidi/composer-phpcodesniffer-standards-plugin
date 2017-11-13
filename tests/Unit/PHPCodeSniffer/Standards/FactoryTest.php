@@ -23,12 +23,12 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\PHPCodeSniffer\Standard
 
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory;
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Factory as StandardFactory;
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Standard;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\StandardsFactory
  */
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class FactoryTest extends TestCase
 {
     /**
      * @var Factory

@@ -24,12 +24,13 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\PHPCodeSniffer\Standard
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Finder;
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory;
 use Higidi\ComposerPhpCSStandardsPlugin\Symfony\Finder\Factory as SymfonyFinderFactory;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder as SymfonyFinder;
 
 /**
  * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Finder
  */
-class FinderTest extends \PHPUnit_Framework_TestCase
+class FinderTest extends TestCase
 {
     /**
      * @var Finder
