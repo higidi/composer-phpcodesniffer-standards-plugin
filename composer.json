@@ -28,6 +28,7 @@
     }
   },
   "require": {
+    "php": ">=5.3.3",
     "composer-plugin-api": "^1.1",
     "squizlabs/php_codesniffer": "^2.0",
     "symfony/finder": "^2.1 || ^3.0",
