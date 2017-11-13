@@ -1,55 +1,70 @@
 stages:
+  - lint
   - test
 
 cache:
   paths:
     - vendor/
 
-before_script:
-  - apt-get update; apt-get install -y unzip
-  - composer install --optimize-autoloader --no-interaction --no-ansi --prefer-dist
-
-lint:coding-guideline: &PHP-LINTING
-  image: tetraweb/php:7.0
-  stage: test
-  script:
-    - mkdir result
-    - ./vendor/bin/phpcs -s -n --report-full=result/phpcs-full.txt --report-diff=result/phpcs-diff.txt --report-summary=result/phpcs-summary.txt
+.lint: &lint
+  image: composer
+  stage: lint
+  before_script:
+    - apk --no-cache add parallel
+    - php -v
+    - composer --no-ansi self-update
+    - composer --no-ansi --version
+    - composer install --optimize-autoloader --classmap-authoritative --no-interaction --prefer-dist --no-ansi
   artifacts:
     when: on_failure
     paths:
       - result
+lint:
+  <<: *lint
+  script:
+    - find . -name \*.php ! -path "./vendor/*" | parallel --gnu php -d display_errors=stderr -l {} > /dev/null \;
+lint:coding-guideline:
+  <<: *lint
+  script:
+    - mkdir result
+    - ./vendor/bin/phpcs -s -n --report-full=result/phpcs-full.txt --report-diff=result/phpcs-diff.txt --report-summary=result/phpcs-summary.txt
 lint:php-mass-detection:
-  <<: *PHP-LINTING
+  <<: *lint
   script:
     - mkdir result
     - ./vendor/bin/phpmd src text phpmd.xml | tee result/phpmd.txt
 
-test:5.3: &PHP-UNITTESTING
-  image: tetraweb/php:5.3
+.test: &test
   stage: test
   tags:
     - docker
   variables:
     TIMEZONE: "Europe/Berlin"
     WITH_XDEBUG: "true"
+  before_script:
+    - apt-get update; apt-get install -y unzip
+    - composer install --optimize-autoloader --no-interaction --no-ansi --prefer-dist
   script:
     - ./vendor/bin/phpunit --coverage-text --colors=never
+
+test:5.3:
+  <<: *test
+  image: tetraweb/php:5.3
 test:5.4:
-  <<: *PHP-UNITTESTING
+  <<: *test
   image: tetraweb/php:5.4
 test:5.5:
-  <<: *PHP-UNITTESTING
+  <<: *test
   image: tetraweb/php:5.5
 test:5.6:
-  <<: *PHP-UNITTESTING
+  <<: *test
   image: tetraweb/php:5.6
 test:7.0:
-  <<: *PHP-UNITTESTING
+  <<: *test
   image: tetraweb/php:7.0
 test:7.1:
-  <<: *PHP-UNITTESTING
+  <<: *test
   image: tetraweb/php:7.1
 test:latest:
-  <<: *PHP-UNITTESTING
+  <<: *test
   image: tetraweb/php:latest
