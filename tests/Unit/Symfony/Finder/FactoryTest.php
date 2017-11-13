@@ -26,6 +26,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\Symfony\Finder\Factory
+ *
+ * @covers \Higidi\ComposerPhpCSStandardsPlugin\Symfony\Finder\Factory
  */
 class FactoryTest extends TestCase
 {

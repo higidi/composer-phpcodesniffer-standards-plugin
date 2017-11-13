@@ -26,7 +26,9 @@ use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Factor
 use PHPUnit\Framework\TestCase;
 
 /**
- * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\StandardsFactory
+ * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory
+ *
+ * @covers \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory
  */
 class FactoryTest extends TestCase
 {

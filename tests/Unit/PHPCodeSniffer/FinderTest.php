@@ -29,6 +29,8 @@ use Symfony\Component\Finder\Finder as SymfonyFinder;
 
 /**
  * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Finder
+ *
+ * @covers \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Finder
  */
 class FinderTest extends TestCase
 {
