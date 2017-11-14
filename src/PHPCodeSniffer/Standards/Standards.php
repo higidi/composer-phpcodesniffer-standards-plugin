@@ -23,6 +23,9 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards;
 
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\StandardInterface;
 
+/**
+ * Class holds a set of PHPCodeSniffer standards.
+ */
 class Standards implements \Iterator
 {
     /**
@@ -35,15 +38,15 @@ class Standards implements \Iterator
      */
     public function __construct(array $standards = array())
     {
-        foreach ($standards as $standard) {
-            $this->addStandard($standard);
-        }
+        $this->setStandards($standards);
     }
 
     /**
-     * @param StandardInterface $standard
+     * Add a single standard to set.
      *
-     * @return $this
+     * @param StandardInterface $standard The standard to add
+     *
+     * @return $this Fluent interface
      */
     public function addStandard(StandardInterface $standard)
     {
@@ -53,9 +56,11 @@ class Standards implements \Iterator
     }
 
     /**
-     * @param string|StandardInterface $standard
+     * Check whether set holds the given standard.
      *
-     * @return bool
+     * @param string|StandardInterface $standard The standard to check
+     *
+     * @return bool True if sets hold the standard, otherwise false
      */
     public function hasStandard($standard)
     {
@@ -63,9 +68,11 @@ class Standards implements \Iterator
     }
 
     /**
-     * @param string|StandardInterface $standard
+     * Remove a single standard from the set.
      *
-     * @return $this
+     * @param string|StandardInterface $standard THe standard to remove
+     *
+     * @return $this Fluent interface
      */
     public function removeStandard($standard)
     {
@@ -77,9 +84,11 @@ class Standards implements \Iterator
     }
 
     /**
-     * @param string|StandardInterface $standard
+     * Get a single standard.
      *
-     * @return StandardInterface|null
+     * @param string|StandardInterface $standard The standard to get
+     *
+     * @return StandardInterface|null Return the standard or null if not exist
      */
     public function getStandard($standard)
     {
@@ -91,17 +100,38 @@ class Standards implements \Iterator
     }
 
     /**
-     * @return array|StandardInterface[]
+     * Get all standards holds by this set.
+     *
+     * @return array|StandardInterface[] Array of standards
      */
     public function getStandards()
     {
-        return $this->standards;
+        return array_values($this->standards);
     }
 
     /**
-     * @param string|StandardInterface $standard
+     * Set standards hold by this set.
      *
-     * @return string
+     * @param StandardInterface[] $standards Array with standards to set
+     *
+     * @return $this Fluent interface
+     */
+    public function setStandards(array $standards)
+    {
+        $this->standards = array();
+        foreach ($standards as $standard) {
+            $this->addStandard($standard);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Extract the name of the given standard.
+     *
+     * @param string|StandardInterface $standard The standard get name from
+     *
+     * @return string The standard name
      */
     protected function getStandardName($standard)
     {
@@ -142,7 +172,9 @@ class Standards implements \Iterator
      */
     public function key()
     {
-        return key($this->standards);
+        $key = key($this->standards);
+
+        return array_search($key, array_keys($this->standards));
     }
 
     /**
