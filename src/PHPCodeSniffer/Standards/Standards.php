@@ -25,7 +25,6 @@ use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Standa
 
 class Standards implements \Iterator
 {
-
     /**
      * @var StandardInterface[]
      */
@@ -43,6 +42,7 @@ class Standards implements \Iterator
 
     /**
      * @param StandardInterface $standard
+     *
      * @return $this
      */
     public function addStandard(StandardInterface $standard)
@@ -54,6 +54,7 @@ class Standards implements \Iterator
 
     /**
      * @param string|StandardInterface $standard
+     *
      * @return bool
      */
     public function hasStandard($standard)
@@ -63,6 +64,7 @@ class Standards implements \Iterator
 
     /**
      * @param string|StandardInterface $standard
+     *
      * @return $this
      */
     public function removeStandard($standard)
@@ -76,6 +78,7 @@ class Standards implements \Iterator
 
     /**
      * @param string|StandardInterface $standard
+     *
      * @return StandardInterface|null
      */
     public function getStandard($standard)
@@ -97,6 +100,7 @@ class Standards implements \Iterator
 
     /**
      * @param string|StandardInterface $standard
+     *
      * @return string
      */
     protected function getStandardName($standard)

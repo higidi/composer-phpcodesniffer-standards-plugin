@@ -71,6 +71,7 @@ class Standard implements StandardInterface
      * Fetch PHPCodeSniffer standard name from ruleset.xml.
      *
      * @param string $ruleSetXmlPath The absolute path to ruleset.xml.
+     *
      * @return string The name of the PHPCodeSniffer standard.
      */
     protected function getNameFromRuleSet($ruleSetXmlPath)

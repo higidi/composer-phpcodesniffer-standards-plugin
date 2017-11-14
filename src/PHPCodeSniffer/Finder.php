@@ -21,8 +21,8 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer;
  * 02110-1301, USA.
  */
 
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standards;
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory;
+use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standards;
 use Higidi\ComposerPhpCSStandardsPlugin\Symfony\Finder\Factory as FinderFactory;
 use Symfony\Component\Finder\Finder as SymfonyFinder;
 
@@ -55,6 +55,7 @@ class Finder
      * Find and return PHPCodeSniffer standards.
      *
      * @param string $path
+     *
      * @return Standards
      *
      * @SuppressWarnings(PHPMD.ShortMethodName)
@@ -91,6 +92,7 @@ class Finder
      * Creates PHPCodeSniffer standards from paths.
      *
      * @param array $path
+     *
      * @return Standards
      */
     protected function createStandardsFromPaths(array $paths)
