@@ -25,6 +25,9 @@ use Composer\Composer;
 use Composer\IO\IOInterface;
 use Composer\Plugin\PluginInterface;
 
+/**
+ * Plugin class register our plugin with composer.
+ */
 class Plugin implements PluginInterface
 {
     /**
