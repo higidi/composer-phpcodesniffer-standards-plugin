@@ -70,7 +70,7 @@ class Standards implements \Iterator
     /**
      * Remove a single standard from the set.
      *
-     * @param string|StandardInterface $standard THe standard to remove
+     * @param string|StandardInterface $standard The standard to remove
      *
      * @return $this Fluent interface
      */
@@ -100,7 +100,7 @@ class Standards implements \Iterator
     }
 
     /**
-     * Get all standards holds by this set.
+     * Get all standards hold by this set.
      *
      * @return array|StandardInterface[] Array of standards
      */
