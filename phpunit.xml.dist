@@ -10,6 +10,10 @@
          syntaxCheck="false"
          bootstrap="tests/bootstrap.php">
 
+    <php>
+        <ini name="memory_limit" value="-1"/>
+    </php>
+
     <testsuites>
         <testsuite name="Unit Tests">
             <directory>./tests/Unit/</directory>
