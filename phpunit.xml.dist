@@ -17,6 +17,9 @@
         <testsuite name="Integration Tests">
             <directory>./tests/Integration/</directory>
         </testsuite>
+        <testsuite name="Functional Tests">
+            <directory>./tests/Functional/</directory>
+        </testsuite>
     </testsuites>
 
     <filter>
