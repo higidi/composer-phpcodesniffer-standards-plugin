@@ -1,0 +1,9 @@
+{
+  "name": "higidi/testcase-simple-standard",
+  "description": "Testcase with simple standard.",
+  "type": "phpcodesniffer-standard",
+  "require": {
+    "higidi/composer-phpcodesniffer-standards-plugin": "dev-develop"
+  },
+  "version": "1.0.0"
+}

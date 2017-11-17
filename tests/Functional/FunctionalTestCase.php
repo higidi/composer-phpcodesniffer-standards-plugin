@@ -50,8 +50,8 @@ class FunctionalTestCase extends TestCase
         $this->tempWorkingDir = $this->createUniqueTmpDirectory();
         chdir($this->tempWorkingDir);
         putenv(sprintf('HOME=%s', $this->tempWorkingDir));
-        putenv('COMPOSER_ROOT_VERSION=dev-master');
         $this->application = new Application();
+        $this->application->setAutoExit(false);
         $this->applicationTester = new ApplicationTester($this->application);
     }
 
@@ -131,8 +131,16 @@ class FunctionalTestCase extends TestCase
                 array(
                     'type' => 'path',
                     'url' => $this->getLocalPackagePath(),
-                )
+                ),
+                array(
+                    'type' => 'path',
+                    'url' => implode(
+                        DIRECTORY_SEPARATOR,
+                        array($this->getLocalPackagePath(), 'tests', 'Fixtures', 'Composer', '*')
+                    ),
+                ),
             ),
+            'minimum-stability' => 'dev',
         );
         $data = array_merge_recursive($defaultData, $data);
         $jsonFile = $this->getComposerJsonFile();
