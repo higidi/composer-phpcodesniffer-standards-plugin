@@ -70,15 +70,16 @@ class Installer extends LibraryInstaller
      */
     public function isInstalled(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
-        if (!parent::isInstalled($repo, $package)) {
+        if (! parent::isInstalled($repo, $package)) {
             return false;
         }
         $srcStandards = $this->getSourceStandards($package);
         $dstStandards = $this->getDestinationStandards($repo);
 
         foreach ($srcStandards as $srcStandard) {
-            if (!$dstStandards->hasStandard($srcStandard)
-                || !$this->compareStandards($srcStandard, $dstStandards->getStandard($srcStandard))
+            if (
+                ! $dstStandards->hasStandard($srcStandard)
+                || ! $this->compareStandards($srcStandard, $dstStandards->getStandard($srcStandard))
             ) {
                 return false;
             }
@@ -110,7 +111,7 @@ class Installer extends LibraryInstaller
      */
     public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
     {
-        if (!$repo->hasPackage($package)) {
+        if (! $repo->hasPackage($package)) {
             throw new \InvalidArgumentException('Package is not installed: ' . $package);
         }
         $this->removeStandards($repo, $package);
@@ -121,6 +122,7 @@ class Installer extends LibraryInstaller
      * @param InstalledRepositoryInterface $repo
      * @param PackageInterface $package
      * @param bool $override
+     *
      * @return void
      *
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
@@ -138,13 +140,14 @@ class Installer extends LibraryInstaller
             $this->io->writeError(sprintf(' <info>%s</info>', $srcStandard->getName()));
             $srcPath = $srcStandard->getPath();
             $dstPath = $dstStdBasePath . DIRECTORY_SEPARATOR . $srcStandard->getName();
-            $filesystem->mirror($srcPath, $dstPath, null, array('override' => $override));
+            $filesystem->mirror($srcPath, $dstPath, null, ['override' => $override]);
         }
     }
 
     /**
      * @param InstalledRepositoryInterface $repo
      * @param PackageInterface $package
+     *
      * @return void
      */
     protected function removeStandards(InstalledRepositoryInterface $repo, PackageInterface $package)
@@ -153,7 +156,7 @@ class Installer extends LibraryInstaller
         $dstStandards = $this->getDestinationStandards($repo);
         $this->io->writeError('    Removing PHP-CodeSniffer Standards:', false);
         foreach ($srcStandards as $srcStandard) {
-            if (!$dstStandards->hasStandard($srcStandard)) {
+            if (! $dstStandards->hasStandard($srcStandard)) {
                 continue;
             }
             $this->io->writeError(sprintf(' <info>%s</info>', $srcStandard->getName()));
@@ -167,6 +170,7 @@ class Installer extends LibraryInstaller
      * Get source (provided by the composer package) standards for package.
      *
      * @param PackageInterface $package
+     *
      * @return Standards
      */
     protected function getSourceStandards(PackageInterface $package)
@@ -180,6 +184,7 @@ class Installer extends LibraryInstaller
      * Get destination (provided by PHPCodeSniffer) standards.
      *
      * @param InstalledRepositoryInterface $repo
+     *
      * @return Standards
      */
     protected function getDestinationStandards(InstalledRepositoryInterface $repo)
@@ -192,6 +197,7 @@ class Installer extends LibraryInstaller
     /**
      * @param Standard $source
      * @param Standard $destination
+     *
      * @return bool
      */
     protected function compareStandards(Standard $source, Standard $destination)
@@ -202,6 +208,7 @@ class Installer extends LibraryInstaller
 
     /**
      * @param string $basePath
+     *
      * @return Standards
      */
     protected function findStandards($basePath)
@@ -211,6 +218,7 @@ class Installer extends LibraryInstaller
 
     /**
      * @param InstalledRepositoryInterface $repo
+     *
      * @return string
      */
     protected function getPHPCodeSnifferStandardsBasePath(InstalledRepositoryInterface $repo)
@@ -223,13 +231,14 @@ class Installer extends LibraryInstaller
 
     /**
      * @param InstalledRepositoryInterface $repo
+     *
      * @return PackageInterface
      */
     protected function getPHPCodeSnifferPackage(InstalledRepositoryInterface $repo)
     {
         $packageKey = 'squizlabs/php_codesniffer';
         $package = $repo->findPackage($packageKey, '*');
-        if (!$package) {
+        if (! $package) {
             throw new \RuntimeException(sprintf('Package "%s" not installed.', $packageKey));
         }
 
@@ -238,6 +247,7 @@ class Installer extends LibraryInstaller
 
     /**
      * @param InstalledRepositoryInterface $repo
+     *
      * @return string
      */
     protected function getPHPCodeSnifferInstallPath(InstalledRepositoryInterface $repo)
@@ -250,8 +260,8 @@ class Installer extends LibraryInstaller
      */
     public function supports($packageType)
     {
-        $secondaryTypes = array('phpcodesniffer-standards');
-        $deprecatedTypes = array('php-codesniffer-standards');
+        $secondaryTypes = ['phpcodesniffer-standards'];
+        $deprecatedTypes = ['php-codesniffer-standards'];
 
         return parent::supports($packageType)
             || in_array($packageType, array_merge($secondaryTypes, $deprecatedTypes));

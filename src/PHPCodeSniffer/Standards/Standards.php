@@ -118,7 +118,7 @@ class Standards implements \Iterator
      */
     public function setStandards(array $standards)
     {
-        $this->standards = array();
+        $this->standards = [];
         foreach ($standards as $standard) {
             $this->addStandard($standard);
         }

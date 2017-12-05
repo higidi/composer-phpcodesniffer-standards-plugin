@@ -77,11 +77,11 @@ class StandardsTest extends TestCase
      */
     public function itAcceptsStandardViaConstructor()
     {
-        $standards = array(
+        $standards = [
             $this->createStandardMock('standard1'),
             $this->createStandardMock('standard2'),
             $this->createStandardMock('standard3'),
-        );
+        ];
 
         $sut = new Standards($standards);
 
@@ -93,11 +93,11 @@ class StandardsTest extends TestCase
      */
     public function itHoldsStandards()
     {
-        $standards = array(
+        $standards = [
             $this->createStandardMock('standard1'),
             $this->createStandardMock('standard2'),
             $this->createStandardMock('standard3'),
-        );
+        ];
 
         $sut = new Standards();
         $sut->setStandards($standards);
@@ -121,7 +121,7 @@ class StandardsTest extends TestCase
         $this->assertSame($standards, $sut->getStandards());
         $sut->addStandard($newStandard);
 
-        $expectedStandards = array_merge($standards, array($newStandard));
+        $expectedStandards = array_merge($standards, [$newStandard]);
         $this->assertSame($expectedStandards, $sut->getStandards());
     }
 
@@ -149,10 +149,10 @@ class StandardsTest extends TestCase
         $standardName = 'blafoo';
         $standard = $this->createStandardMock($standardName);
 
-        return array(
-            'as_string' => array($standard, $standardName),
-            'as_object' => array($standard, $standard)
-        );
+        return [
+            'as_string' => [$standard, $standardName],
+            'as_object' => [$standard, $standard],
+        ];
     }
 
     /**
@@ -192,12 +192,12 @@ class StandardsTest extends TestCase
      */
     public function itIsIteratable()
     {
-        $standards = array(
+        $standards = [
             $this->createStandardMock('standard1'),
             $this->createStandardMock('standard2'),
             $this->createStandardMock('standard3'),
-        );
-        $iteratedStandards = array();
+        ];
+        $iteratedStandards = [];
 
         $sut = new Standards($standards);
         foreach ($sut as $key => $standard) {
