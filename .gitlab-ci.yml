@@ -28,6 +28,7 @@ lint:coding-guideline:
   script:
     - mkdir result
     - ./vendor/bin/phpcs -s -n --report-full=result/phpcs-full.txt --report-diff=result/phpcs-diff.txt --report-summary=result/phpcs-summary.txt
+    - cat result/phpcs-full.txt
 lint:php-mass-detection:
   <<: *lint
   script:
@@ -47,9 +48,6 @@ lint:php-mass-detection:
   script:
     - ./vendor/bin/phpunit --coverage-text --colors=never
 
-test:5.3:
-  <<: *test
-  image: tetraweb/php:5.3
 test:5.4:
   <<: *test
   image: tetraweb/php:5.4

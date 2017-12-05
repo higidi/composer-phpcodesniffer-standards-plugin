@@ -52,7 +52,7 @@ class FactoryTest extends TestCase
     {
         $path = implode(
             DIRECTORY_SEPARATOR,
-            array(__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', 'Standard1')
+            [__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', 'Standard1']
         );
         $standard = $this->classUnderTesting->create($path);
 

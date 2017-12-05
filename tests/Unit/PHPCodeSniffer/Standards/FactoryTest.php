@@ -68,10 +68,10 @@ class FactoryTest extends TestCase
 
     public function testCreateStandard()
     {
-        $paths = array();
+        $paths = [];
         $paths[] = implode(
             DIRECTORY_SEPARATOR,
-            array(__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', 'Standard1')
+            [__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', 'Standard1']
         );
         $this->standardFactoryMock
             ->expects($this->exactly(count($paths)))

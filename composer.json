@@ -17,6 +17,10 @@
       "role": "Developer"
     }
   ],
+  "support": {
+    "issues": "https://git.higidi.com/higidi/composer-phpcodesniffer-standards-plugin/issues",
+    "source": "https://git.higidi.com/higidi/composer-phpcodesniffer-standards-plugin"
+  },
   "autoload": {
     "psr-4": {
       "Higidi\\ComposerPhpCSStandardsPlugin\\": "src/"
@@ -28,6 +32,7 @@
     }
   },
   "require": {
+    "php": "^5.4 || ^7.0",
     "composer-plugin-api": "^1.1",
     "squizlabs/php_codesniffer": "^2.0",
     "symfony/finder": "^2.1 || ^3.0",

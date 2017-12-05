@@ -103,21 +103,21 @@ class StandardsTest extends TestCase
         $sut->setStandards($standards);
 
         $this->assertSame($standards, $sut->getStandards());
+
+        return $sut;
     }
 
     /**
      * @test
+     * @depends itHoldsStandards
+     *
+     * @param Standards $sut
      */
-    public function itCanAddStandardsToTheSet()
+    public function itCanAddStandardsToTheSet(Standards $sut)
     {
-        $standards = array(
-            $this->createStandardMock('standard1'),
-            $this->createStandardMock('standard2'),
-            $this->createStandardMock('standard3'),
-        );
+        $standards = $sut->getStandards();
         $newStandard = $this->createStandardMock('standard4');
 
-        $sut = new Standards($standards);
         $this->assertSame($standards, $sut->getStandards());
         $sut->addStandard($newStandard);
 
@@ -127,19 +127,15 @@ class StandardsTest extends TestCase
 
     /**
      * @test
+     * @depends itHoldsStandards
+     *
+     * @param Standards $sut
      */
-    public function itCanRemoveStandardsFromTheSet()
+    public function itCanRemoveStandardsFromTheSet(Standards $sut)
     {
-        $standards = array(
-            $this->createStandardMock('standard1'),
-            $this->createStandardMock('standard2'),
-            $this->createStandardMock('standard3'),
-        );
-        $removeableStandard = $this->createStandardMock('standard4');
-        $initalStandards = array_merge($standards, array($removeableStandard));
+        $standards = $sut->getStandards();
+        $removeableStandard = array_shift($standards);
 
-        $sut = new Standards($initalStandards);
-        $this->assertSame($initalStandards, $sut->getStandards());
         $sut->removeStandard($removeableStandard);
 
         $this->assertSame($standards, $sut->getStandards());

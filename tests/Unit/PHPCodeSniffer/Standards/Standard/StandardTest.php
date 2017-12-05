@@ -33,12 +33,15 @@ class StandardTest extends TestCase
 {
     /**
      * @dataProvider differentStandards
+     *
+     * @param string $standardName
+     * @param string $expectedName
      */
     public function testStandard($standardName, $expectedName)
     {
         $path = implode(
             DIRECTORY_SEPARATOR,
-            array(__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', $standardName)
+            [__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', $standardName]
         );
         $ruleSetXmlPath = $path . DIRECTORY_SEPARATOR . 'ruleset.xml';
 
@@ -63,20 +66,20 @@ class StandardTest extends TestCase
 
     public function differentStandards()
     {
-        return array(
-            'No Ruleset' => array(
+        return [
+            'No Ruleset' => [
                 'Standard1',
                 'Standard1',
-            ),
-            'Ruleset with name' => array(
+            ],
+            'Ruleset with name' => [
                 'standard_with_ruleset',
                 'CustomStandard',
-            ),
-            'Ruleset without name' => array(
+            ],
+            'Ruleset without name' => [
                 'standard_with_ruleset_without_name',
                 'standard_with_ruleset_without_name',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -94,7 +97,7 @@ class StandardTest extends TestCase
     {
         $path = implode(
             DIRECTORY_SEPARATOR,
-            array(__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', 'InvalidStandard')
+            [__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', 'InvalidStandard']
         );
 
         new Standard($path);

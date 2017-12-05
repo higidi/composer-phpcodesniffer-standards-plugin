@@ -51,7 +51,7 @@ class Standard implements StandardInterface
      */
     public function __construct($path)
     {
-        if (!is_readable($path)) {
+        if (! is_readable($path)) {
             throw new StandardPathAccessDeniedException(
                 sprintf('Standard path "%s" is not accessable.', $path)
             );
@@ -60,7 +60,7 @@ class Standard implements StandardInterface
         $this->ruleSetXmlPath = $path . DIRECTORY_SEPARATOR . static::RULESET_FILENAME;
         $this->name = $this->getNameFromRuleSet($this->ruleSetXmlPath);
 
-        if (!is_readable($this->ruleSetXmlPath)) {
+        if (! is_readable($this->ruleSetXmlPath)) {
             throw new InvalidStandardException(
                 sprintf('Standard "%s" doesn\'t contain a "ruleset.xml" file.', $this->name)
             );
@@ -78,8 +78,7 @@ class Standard implements StandardInterface
     {
         try {
             $ruleSet = new \SimpleXMLElement(file_get_contents($ruleSetXmlPath));
-            $attributes = $ruleSet->attributes();
-            $name = trim($attributes['name']);
+            $name = trim($ruleSet->attributes()['name']);
             if ($name !== '') {
                 return $name;
             }
