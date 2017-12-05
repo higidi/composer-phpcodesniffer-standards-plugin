@@ -30,6 +30,7 @@ class Factory
      * Creates PHPCodeSniffer standard from path.
      *
      * @param string $path Path to the PHPCodeSniffer standard.
+     *
      * @return Standard PHPCodeSniffer standard object.
      */
     public function create($path)

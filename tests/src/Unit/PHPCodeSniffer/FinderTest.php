@@ -78,28 +78,28 @@ class FinderTest extends \PHPUnit_Framework_TestCase
 
     public function testFinder()
     {
-        $path = realpath(implode(DIRECTORY_SEPARATOR, array(__DIR__, '..', '..', '..', 'Fixtures', 'Standards')));
-        $expected = array(
+        $path = realpath(implode(DIRECTORY_SEPARATOR, [__DIR__, '..', '..', '..', 'Fixtures', 'Standards']));
+        $expected = [
             $path . DIRECTORY_SEPARATOR . 'Standard1',
-        );
+        ];
 
-        foreach (array('in', 'files', 'name', 'sortByName') as $fluentMethod) {
+        foreach (['in', 'files', 'name', 'sortByName'] as $fluentMethod) {
             $this->symfonyFinderMock
                 ->method($fluentMethod)
                 ->willReturn($this->symfonyFinderMock);
         }
 
         $splFileInfoMock = $this->getMockBuilder('Symfony\Component\Finder\SplFileInfo')
-            ->setConstructorArgs(array(null, null, null))
+            ->setConstructorArgs([null, null, null])
             ->getMock();
         $splFileInfoMock
             ->expects($this->once())
             ->method('getPath')
             ->willReturn($path . DIRECTORY_SEPARATOR . 'Standard1');
         $finderIterator = new \ArrayIterator(
-            array(
+            [
                 $splFileInfoMock,
-            )
+            ]
         );
         $this->symfonyFinderMock
             ->expects($this->once())
