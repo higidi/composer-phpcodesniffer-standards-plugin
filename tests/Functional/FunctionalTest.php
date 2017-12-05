@@ -33,7 +33,6 @@ class FunctionalTest extends FunctionalTestCase
         );
 
         $exitCode = $this->applicationTester->run(['install']);
-        $test = $this->applicationTester->getDisplay();
 
         $this->assertSame(0, $exitCode);
         $this->assertFileExists($dstPath);
