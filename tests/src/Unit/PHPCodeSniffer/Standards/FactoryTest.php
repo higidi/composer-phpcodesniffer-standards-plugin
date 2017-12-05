@@ -23,7 +23,6 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\PHPCodeSniffer\Standard
 
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Factory;
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Factory as StandardFactory;
-use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Standard;
 
 /**
  * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\StandardsFactory
@@ -66,10 +65,10 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateStandard()
     {
-        $paths = array();
+        $paths = [];
         $paths[] = implode(
             DIRECTORY_SEPARATOR,
-            array(__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', 'Standard1')
+            [__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', 'Standard1']
         );
         $this->standardFactoryMock
             ->expects($this->exactly(count($paths)))

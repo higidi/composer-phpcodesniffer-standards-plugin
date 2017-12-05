@@ -45,6 +45,7 @@ class Factory
      * Creates PHPCodeSniffer standards from paths.
      *
      * @param array $paths Paths with PHPCodeSniffer standard paths.
+     *
      * @return Standards PHPCodeSniffer standards object.
      */
     public function create(array $paths)
