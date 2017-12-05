@@ -77,8 +77,7 @@ class Installer extends LibraryInstaller
         $dstStandards = $this->getDestinationStandards($repo);
 
         foreach ($srcStandards as $srcStandard) {
-            if (
-                ! $dstStandards->hasStandard($srcStandard)
+            if (! $dstStandards->hasStandard($srcStandard)
                 || ! $this->compareStandards($srcStandard, $dstStandards->getStandard($srcStandard))
             ) {
                 return false;
