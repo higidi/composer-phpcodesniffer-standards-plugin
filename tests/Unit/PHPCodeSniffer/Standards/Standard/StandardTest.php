@@ -33,6 +33,9 @@ class StandardTest extends TestCase
 {
     /**
      * @dataProvider differentStandards
+     *
+     * @param string $standardName
+     * @param string $expectedName
      */
     public function testStandard($standardName, $expectedName)
     {
