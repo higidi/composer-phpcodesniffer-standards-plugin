@@ -10,31 +10,30 @@ class FunctionalTest extends FunctionalTestCase
     public function itInstallPhpCodeSnifferStandards()
     {
         $this->writeComposerJson(
-            array(
-                'require-dev' => array(
-                    'higidi/testcase-simple-standard' => '1.0.0',
-                )
-            )
+            [
+                'higidi/testcase-simple-standard' => '1.0.0',
+            ]
         );
         $srcPath = implode(
             DIRECTORY_SEPARATOR,
-            array($this->getLocalPackagePath(), 'tests', 'fixtures', 'Composer', 'simple-standard', 'ruleset.xml')
+            [$this->getLocalPackagePath(), 'tests', 'fixtures', 'Composer', 'simple-standard', 'ruleset.xml']
         );
         $dstPath = implode(
             DIRECTORY_SEPARATOR,
-            array(
-                $this->tempWorkingDir,
+            [
+                $this->testWorkingDir,
                 'vendor',
                 'squizlabs',
                 'php_codesniffer',
                 'CodeSniffer',
                 'Standards',
                 'Simple-Standard',
-                'ruleset.xml'
-            )
+                'ruleset.xml',
+            ]
         );
 
-        $exitCode = $this->applicationTester->run(array('install'));
+        $exitCode = $this->applicationTester->run(['install']);
+        $test = $this->applicationTester->getDisplay();
 
         $this->assertSame(0, $exitCode);
         $this->assertFileExists($dstPath);
@@ -47,38 +46,36 @@ class FunctionalTest extends FunctionalTestCase
     public function itUninstallPhpCodeSnifferStandards()
     {
         $this->writeComposerJson(
-            array(
-                'require-dev' => array(
-                    'higidi/testcase-simple-standard' => '1.0.0',
-                )
-            )
+            [
+                'higidi/testcase-simple-standard' => '1.0.0',
+            ]
         );
         $srcPath = implode(
             DIRECTORY_SEPARATOR,
-            array($this->getLocalPackagePath(), 'tests', 'fixtures', 'Composer', 'simple-standard', 'ruleset.xml')
+            [$this->getLocalPackagePath(), 'tests', 'fixtures', 'Composer', 'simple-standard', 'ruleset.xml']
         );
         $dstPath = implode(
             DIRECTORY_SEPARATOR,
-            array(
-                $this->tempWorkingDir,
+            [
+                $this->testWorkingDir,
                 'vendor',
                 'squizlabs',
                 'php_codesniffer',
                 'CodeSniffer',
                 'Standards',
                 'Simple-Standard',
-                'ruleset.xml'
-            )
+                'ruleset.xml',
+            ]
         );
 
-        $exitCode = $this->applicationTester->run(array('install'));
+        $exitCode = $this->applicationTester->run(['install']);
 
         $this->assertSame(0, $exitCode);
         $this->assertFileExists($dstPath);
         $this->assertFileEquals($srcPath, $dstPath);
 
         $exitCode = $this->applicationTester->run(
-            array('command' => 'remove', 'packages' => array('higidi/testcase-simple-standard'))
+            ['command' => 'remove', 'packages' => ['higidi/testcase-simple-standard']]
         );
 
         $this->assertSame(0, $exitCode);

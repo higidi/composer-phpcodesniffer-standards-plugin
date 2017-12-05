@@ -3,7 +3,7 @@
   "description": "Testcase with simple standard.",
   "type": "phpcodesniffer-standard",
   "require": {
-    "higidi/composer-phpcodesniffer-standards-plugin": "dev-develop"
+    "higidi/composer-phpcodesniffer-standards-plugin": "dev-workingDir"
   },
   "version": "1.0.0"
 }

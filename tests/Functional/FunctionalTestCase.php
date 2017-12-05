@@ -17,17 +17,12 @@ class FunctionalTestCase extends TestCase
     /**
      * @var string
      */
-    protected $oldHomeDirectory;
-
-    /**
-     * @var string
-     */
     protected $oldWorkingDirectory;
 
     /**
      * @var string
      */
-    protected $tempWorkingDir;
+    protected $testWorkingDir;
 
     /**
      * @var Application
@@ -46,10 +41,8 @@ class FunctionalTestCase extends TestCase
     {
         parent::setUp();
         $this->oldWorkingDirectory = getcwd();
-        $this->oldHomeDirectory = getenv('HOME');
-        $this->tempWorkingDir = $this->createUniqueTmpDirectory();
-        chdir($this->tempWorkingDir);
-        putenv(sprintf('HOME=%s', $this->tempWorkingDir));
+        $this->testWorkingDir = $this->createUniqueTmpDirectory();
+        chdir($this->testWorkingDir);
         $this->application = new Application();
         $this->application->setAutoExit(false);
         $this->applicationTester = new ApplicationTester($this->application);
@@ -61,18 +54,16 @@ class FunctionalTestCase extends TestCase
     protected function tearDown()
     {
         parent::tearDown();
-        if ($this->tempWorkingDir) {
-            $fs = new Filesystem();
-            $fs->remove($this->tempWorkingDir);
-        }
         chdir($this->oldWorkingDirectory);
-        putenv(sprintf('HOME=%s', $this->oldHomeDirectory));
-        putenv('COMPOSER_ROOT_VERSION');
-        unset($this->oldWorkingDirectory, $this->workingDir);
+        if ($this->testWorkingDir) {
+            $fs = new Filesystem();
+            $fs->remove($this->testWorkingDir);
+        }
+        unset($this->oldWorkingDirectory, $this->testWorkingDir);
     }
 
     /**
-     * @return bool|string
+     * @return string
      */
     protected function createUniqueTmpDirectory()
     {
@@ -83,7 +74,7 @@ class FunctionalTestCase extends TestCase
             $unique = $root . DIRECTORY_SEPARATOR . uniqid('composer-test-' . rand(1000, 9000));
 
             $fs = new Filesystem();
-            if (!file_exists($unique)) {
+            if (! file_exists($unique)) {
                 $fs->mkdir($unique);
 
                 return realpath($unique);
@@ -120,31 +111,77 @@ class FunctionalTestCase extends TestCase
     }
 
     /**
-     * @param array $data
+     * @return string
+     */
+    protected function getLocalPackageComposerPath()
+    {
+        return $this->getLocalPackagePath() . DIRECTORY_SEPARATOR . 'composer.json';
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getLocalPackageComposerPackage()
+    {
+        $jsonFile = new JsonFile($this->getLocalPackageComposerPath());
+
+        $json = $jsonFile->read();
+        if (! is_array($json)) {
+            throw new \RuntimeException();
+        }
+        $json['version'] = 'dev-workingDir';
+        $json['dist'] = [
+            'type' => 'path',
+            'url' => $this->getLocalPackagePath(),
+        ];
+
+        return $json;
+    }
+
+    /**
+     * @param array $requireDev
+     * @param array $require
+     * @param array $additionalJson
      *
      * @return void
      */
-    protected function writeComposerJson(array $data)
+    protected function writeComposerJson(array $requireDev, array $require = [], array $additionalJson = [])
     {
-        $defaultData = array(
-            'repositories' => array(
-                array(
-                    'type' => 'path',
-                    'url' => $this->getLocalPackagePath(),
-                ),
-                array(
+        $defaultJson = [
+            'repositories' => [
+                [
+                    'type' => 'package',
+                    'package' => $this->getLocalPackageComposerPackage(),
+                ],
+                [
                     'type' => 'path',
                     'url' => implode(
                         DIRECTORY_SEPARATOR,
-                        array($this->getLocalPackagePath(), 'tests', 'Fixtures', 'Composer', '*')
+                        [$this->getLocalPackagePath(), 'tests', 'Fixtures', 'Composer', '*']
                     ),
-                ),
-            ),
+                ],
+            ],
             'minimum-stability' => 'dev',
-        );
-        $data = array_merge_recursive($defaultData, $data);
+            'config' => [
+                'bin-dir' => 'bin',
+                'vendor-dir' => 'vendor',
+            ],
+            'require-dev' => [
+                'squizlabs/php_codesniffer' => '*',
+            ],
+        ];
+        $json = [
+            'require-dev' => $requireDev,
+        ];
+        if (count($require) > 0) {
+            $json['require'] = $require;
+        }
+        $json = array_replace_recursive($defaultJson, $json);
+        if (count($additionalJson) > 0) {
+            $json = array_replace_recursive($json, $additionalJson);
+        }
         $jsonFile = $this->getComposerJsonFile();
 
-        $jsonFile->write($data);
+        $jsonFile->write($json);
     }
 }
