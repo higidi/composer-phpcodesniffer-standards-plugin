@@ -48,9 +48,6 @@ lint:php-mass-detection:
   script:
     - ./vendor/bin/phpunit --coverage-text --colors=never
 
-test:5.3:
-  <<: *test
-  image: tetraweb/php:5.3
 test:5.4:
   <<: *test
   image: tetraweb/php:5.4

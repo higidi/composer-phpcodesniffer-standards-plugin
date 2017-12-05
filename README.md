@@ -8,7 +8,7 @@ Composer plugin installs [PHP_CodeSniffer](https://github.com/squizlabs/PHP_Code
 Requirements
 ------------
 
-- `PHP >= 5.3.3`
+- `PHP >= 5.4`
 - Composer package providing the PHP CodeSniffer Rulesets & Sniffs
 
 Installation
