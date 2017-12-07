@@ -55,11 +55,19 @@ class ComposerTestCase extends TestCase
     {
         parent::tearDown();
         chdir($this->oldWorkingDirectory);
-        if ($this->testWorkingDir && !$this->hasFailed()) {
+        if ($this->testWorkingDir && $this->hasPassed()) {
             $fs = new Filesystem();
             $fs->remove($this->testWorkingDir);
         }
         unset($this->oldWorkingDirectory, $this->testWorkingDir);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function hasPassed()
+    {
+        return $this->getStatus() === \PHPUnit_Runner_BaseTestRunner::STATUS_PASSED;
     }
 
     /**
