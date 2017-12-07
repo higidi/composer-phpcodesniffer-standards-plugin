@@ -12,7 +12,7 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * Base functional test case.
  */
-class FunctionalTestCase extends TestCase
+class ComposerTestCase extends TestCase
 {
     /**
      * @var string

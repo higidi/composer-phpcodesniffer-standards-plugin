@@ -2,7 +2,7 @@
 
 namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Functional;
 
-class FunctionalTest extends FunctionalTestCase
+class FunctionalTest extends ComposerTestCase
 {
     /**
      * @test
