@@ -44,15 +44,18 @@ lint:php-mass-detection:
   before_script:
     - apt-get update; apt-get install -y unzip
     - php -v
+    - php -r 'echo sys_get_temp_dir() . PHP_EOL;'
     - composer --no-ansi self-update
     - composer --no-ansi --version
     - composer install --optimize-autoloader --classmap-authoritative --no-interaction --prefer-dist --no-ansi
   script:
     - ./vendor/bin/phpunit --coverage-text --colors=never
+  after_script:
+    - mv -f `php -r 'echo sys_get_temp_dir();'`/composer-test .build
   artifacts:
     when: on_failure
     paths:
-      - /tmp/composer-test
+      - .build/
 
 test:5.4:
   <<: *test
