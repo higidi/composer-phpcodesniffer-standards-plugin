@@ -55,7 +55,7 @@ class ComposerTestCase extends TestCase
     {
         parent::tearDown();
         chdir($this->oldWorkingDirectory);
-        if ($this->testWorkingDir) {
+        if ($this->testWorkingDir && !$this->hasFailed()) {
             $fs = new Filesystem();
             $fs->remove($this->testWorkingDir);
         }
