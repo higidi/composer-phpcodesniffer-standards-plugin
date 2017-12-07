@@ -68,10 +68,16 @@ class FunctionalTestCase extends TestCase
     protected function createUniqueTmpDirectory()
     {
         $attempts = 5;
-        $root = sys_get_temp_dir();
+        $randomize = false;
+        $root = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'composer-test';
+        $name = $this->getName();
+        $folderName = preg_replace('/[^a-zA-Z0-9\-\._]/', '', $name);
 
         do {
-            $unique = $root . DIRECTORY_SEPARATOR . uniqid('composer-test-' . rand(1000, 9000));
+            $unique = $root . DIRECTORY_SEPARATOR . $folderName;
+            if ($randomize) {
+                $unique .= '-' . uniqid(rand(1000, 9000));
+            }
 
             $fs = new Filesystem();
             if (! file_exists($unique)) {
@@ -79,6 +85,7 @@ class FunctionalTestCase extends TestCase
 
                 return realpath($unique);
             }
+            $randomize = true;
         } while (--$attempts);
 
         throw new \RuntimeException('Failed to create a unique temporary directory.');

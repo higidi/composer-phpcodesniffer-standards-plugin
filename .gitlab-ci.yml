@@ -46,6 +46,10 @@ lint:php-mass-detection:
     - composer install --optimize-autoloader --no-interaction --no-ansi --prefer-dist
   script:
     - ./vendor/bin/phpunit --coverage-text --colors=never
+  artifacts:
+    when: on_failure
+    paths:
+      - /tmp/composer-test
 
 test:5.4:
   <<: *test
