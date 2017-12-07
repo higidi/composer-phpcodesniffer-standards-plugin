@@ -43,7 +43,10 @@ lint:php-mass-detection:
     WITH_XDEBUG: "true"
   before_script:
     - apt-get update; apt-get install -y unzip
-    - composer install --optimize-autoloader --no-interaction --no-ansi --prefer-dist
+    - php -v
+    - composer --no-ansi self-update
+    - composer --no-ansi --version
+    - composer install --optimize-autoloader --classmap-authoritative --no-interaction --prefer-dist --no-ansi
   script:
     - ./vendor/bin/phpunit --coverage-text --colors=never
   artifacts:
