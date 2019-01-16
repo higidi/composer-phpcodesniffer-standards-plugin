@@ -22,11 +22,14 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\Symfony\Finder;
  */
 
 use Higidi\ComposerPhpCSStandardsPlugin\Symfony\Finder\Factory;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\Symfony\Finder\Factory
+ *
+ * @covers \Higidi\ComposerPhpCSStandardsPlugin\Symfony\Finder\Factory
  */
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class FactoryTest extends TestCase
 {
     public function testCreateFinder()
     {

@@ -28,7 +28,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Higidi\\ComposerPhpCSStandardsPlugin\\Tests\\": "tests/src/"
+      "Higidi\\ComposerPhpCSStandardsPlugin\\Tests\\": "tests/"
     }
   },
   "require": {
@@ -40,7 +40,7 @@
   },
   "require-dev": {
     "composer/composer": "^1.4",
-    "phpunit/phpunit": "^4.5 || ^5.0.5",
+    "phpunit/phpunit": "^4.8.36 || ^5.0.5",
     "phpmd/phpmd": "^2.6"
   },
   "extra": {

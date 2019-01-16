@@ -22,11 +22,14 @@ namespace Higidi\ComposerPhpCSStandardsPlugin\Tests\Unit\PHPCodeSniffer\Standard
  */
 
 use Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Factory;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test case for class \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Factory
+ *
+ * @covers \Higidi\ComposerPhpCSStandardsPlugin\PHPCodeSniffer\Standards\Standard\Factory
  */
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class FactoryTest extends TestCase
 {
     /**
      * @var Factory
@@ -49,7 +52,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $path = implode(
             DIRECTORY_SEPARATOR,
-            [__DIR__, '..', '..', '..', '..', '..', 'Fixtures', 'Standards', 'Standard1']
+            [__DIR__, '..', '..', '..', '..', 'Fixtures', 'Standards', 'Standard1']
         );
         $standard = $this->classUnderTesting->create($path);
 
